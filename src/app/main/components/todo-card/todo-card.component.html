@@ -16,23 +16,29 @@
   <button type="button" (click)="submitTodo(todoTitle, todoDescription)">submit</button>
 </ng-container>
 
-<ul class="todos">
-  <li *ngFor="let todo of todos">
-    <h2 (click)="showDesc(todo)">{{ todo.title }}</h2>
-    <p [class.extended]="todo === currentTodo" class="description">{{ todo.description }}</p>
-    <button type="button" (click)="deleteTodo(todo)">delete</button>
-    <button type="button" (click)="doneTodo(todo)">done</button>
-    <button type="button" (click)="editTodo(todo)">edit</button>
-  </li>
-</ul>
-
-<ng-container *ngIf="doneTodos.length">
-  <h1>Done Todos</h1>
-  <ul class="done-todos">
-    <li *ngFor="let todo of doneTodos">
-      <h2>{{ todo.title }}</h2>
-      <p>{{ todo.description }}</p>
-      <button type="button" (click)="deleteDoneTodo(todo)">delete</button>
+<div class="todos">
+  <ul>
+    <li *ngFor="let todo of todos">
+      <h2 (click)="showDesc(todo)">{{ todo.title }}</h2>
+      <p [class.extended]="todo === currentTodo" class="description">{{ todo.description }}</p>
+      <div class="buttons">
+        <button type="button" (click)="deleteTodo(todo)">delete</button>
+        <button type="button" (click)="doneTodo(todo)">done</button>
+        <button type="button" (click)="editTodo(todo)">edit</button>
+      </div>
     </li>
   </ul>
+</div>
+
+<ng-container *ngIf="doneTodos.length">
+  <div class="todos">
+    <h1>Done Todos</h1>
+    <ul class="done-todos">
+      <li *ngFor="let todo of doneTodos">
+        <h2>{{ todo.title }}</h2>
+        <p>{{ todo.description }}</p>
+        <button type="button" (click)="deleteDoneTodo(todo)">delete</button>
+      </li>
+    </ul>
+  </div>
 </ng-container>
