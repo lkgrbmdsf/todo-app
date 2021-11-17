@@ -1,0 +1,15 @@
+ul {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  list-style: none;
+}
+
+.description {
+  display: none;
+}
+
+.extended {
+  display: block;
+}

@@ -1,0 +1,38 @@
+<ng-content></ng-content>
+
+<ng-container class="modal" *ngIf="isCreated">
+  <label for="title">Todo title: </label>
+  <input type="text" name="title" [(ngModel)]="todoTitle" />
+  <label for="description">Todo description: </label>
+  <input type="text" name="description" [(ngModel)]="todoDescription" />
+  <button type="button" (click)="addTodo(todoTitle, todoDescription)">submit</button>
+</ng-container>
+
+<ng-container class="modal" *ngIf="isEdit">
+  <label for="title">{{ currentTodo?.title }}</label>
+  <input type="text" name="title" [(ngModel)]="todoTitle" />
+  <label for="description">{{ currentTodo?.description }}</label>
+  <input type="text" name="description" [(ngModel)]="todoDescription" />
+  <button type="button" (click)="submitTodo(todoTitle, todoDescription)">submit</button>
+</ng-container>
+
+<ul class="todos">
+  <li *ngFor="let todo of todos">
+    <h2 (click)="showDesc(todo)">{{ todo.title }}</h2>
+    <p [class.extended]="todo === currentTodo" class="description">{{ todo.description }}</p>
+    <button type="button" (click)="deleteTodo(todo)">delete</button>
+    <button type="button" (click)="doneTodo(todo)">done</button>
+    <button type="button" (click)="editTodo(todo)">edit</button>
+  </li>
+</ul>
+
+<ng-container *ngIf="doneTodos.length">
+  <h1>Done Todos</h1>
+  <ul class="done-todos">
+    <li *ngFor="let todo of doneTodos">
+      <h2>{{ todo.title }}</h2>
+      <p>{{ todo.description }}</p>
+      <button type="button" (click)="deleteDoneTodo(todo)">delete</button>
+    </li>
+  </ul>
+</ng-container>
