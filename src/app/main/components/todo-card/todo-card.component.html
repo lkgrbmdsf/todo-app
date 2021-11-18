@@ -1,25 +1,31 @@
 <ng-content></ng-content>
 
-<ng-container class="modal" *ngIf="isCreated">
-  <label for="title">Todo title: </label>
-  <input type="text" name="title" [(ngModel)]="todoTitle" />
-  <label for="description">Todo description: </label>
-  <input type="text" name="description" [(ngModel)]="todoDescription" />
-  <label for="description">Todo deadline: </label>
-  <input type="date" name="description" [(ngModel)]="deadlineDate" />
-  <button type="button" (click)="addTodo(todoTitle, todoDescription, deadlineDate)">submit</button>
+<ng-container *ngIf="isCreated">
+  <form class="modal">
+    <label for="title">Todo title: </label>
+    <input type="text" name="title" [(ngModel)]="todoTitle" />
+    <label for="description">Todo description: </label>
+    <input type="text" name="description" [(ngModel)]="todoDescription" />
+    <label for="description">Todo deadline: </label>
+    <input type="date" name="description" [(ngModel)]="deadlineDate" />
+    <button type="button" (click)="addTodo(todoTitle, todoDescription, deadlineDate)">
+      submit
+    </button>
+  </form>
 </ng-container>
 
 <ng-container class="modal" *ngIf="isEdit">
-  <label for="title">{{ currentTodo?.title }}</label>
-  <input type="text" name="title" [(ngModel)]="todoTitle" />
-  <label for="description">{{ currentTodo?.description }}</label>
-  <input type="text" name="description" [(ngModel)]="todoDescription" />
-  <label for="description">Todo deadline: </label>
-  <input type="date" name="description" [(ngModel)]="deadlineDate" />
-  <button type="button" (click)="submitTodo(todoTitle, todoDescription, deadlineDate)">
-    submit
-  </button>
+  <form class="modal">
+    <label for="title">{{ currentTodo?.title }}</label>
+    <input type="text" name="title" [(ngModel)]="todoTitle" />
+    <label for="description">{{ currentTodo?.description }}</label>
+    <input type="text" name="description" [(ngModel)]="todoDescription" />
+    <label for="description">Todo deadline: </label>
+    <input type="date" name="description" [(ngModel)]="deadlineDate" />
+    <button type="button" (click)="submitTodo(todoTitle, todoDescription, deadlineDate)">
+      submit
+    </button>
+  </form>
 </ng-container>
 
 <div class="todos">
