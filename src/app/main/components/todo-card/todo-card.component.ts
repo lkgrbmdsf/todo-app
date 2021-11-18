@@ -24,8 +24,10 @@ export class TodoCardComponent {
 
   todoDescription: string = '';
 
-  addTodo(title: string, description: string) {
-    const todo = { title: title, description: description };
+  deadlineDate?: Date;
+
+  addTodo(title: string, description: string, deadline?: Date) {
+    const todo = { title: title, description: description, deadlineDate: deadline };
     this.isCreated = false;
     return this.todos.push(todo);
   }
@@ -57,12 +59,13 @@ export class TodoCardComponent {
     this.currentTodo = todo;
   }
 
-  submitTodo(title: string, description: string): void {
+  submitTodo(title: string, description: string, deadline?: Date): void {
     this.isEdit = false;
 
     if (this.currentTodo) {
       this.currentTodo.title = title;
       this.currentTodo.description = description;
+      this.currentTodo.deadlineDate = deadline;
     }
   }
 

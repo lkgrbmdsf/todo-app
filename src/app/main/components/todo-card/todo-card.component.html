@@ -5,7 +5,9 @@
   <input type="text" name="title" [(ngModel)]="todoTitle" />
   <label for="description">Todo description: </label>
   <input type="text" name="description" [(ngModel)]="todoDescription" />
-  <button type="button" (click)="addTodo(todoTitle, todoDescription)">submit</button>
+  <label for="description">Todo deadline: </label>
+  <input type="date" name="description" [(ngModel)]="deadlineDate" />
+  <button type="button" (click)="addTodo(todoTitle, todoDescription, deadlineDate)">submit</button>
 </ng-container>
 
 <ng-container class="modal" *ngIf="isEdit">
@@ -13,7 +15,11 @@
   <input type="text" name="title" [(ngModel)]="todoTitle" />
   <label for="description">{{ currentTodo?.description }}</label>
   <input type="text" name="description" [(ngModel)]="todoDescription" />
-  <button type="button" (click)="submitTodo(todoTitle, todoDescription)">submit</button>
+  <label for="description">Todo deadline: </label>
+  <input type="date" name="description" [(ngModel)]="deadlineDate" />
+  <button type="button" (click)="submitTodo(todoTitle, todoDescription, deadlineDate)">
+    submit
+  </button>
 </ng-container>
 
 <div class="todos">
@@ -21,6 +27,7 @@
     <li *ngFor="let todo of todos">
       <h2 (click)="showDesc(todo)">{{ todo.title }}</h2>
       <p [class.extended]="todo === currentTodo" class="description">{{ todo.description }}</p>
+      <p>{{ todo.deadlineDate | date: 'longDate' }}</p>
       <div class="buttons">
         <button type="button" (click)="deleteTodo(todo)">delete</button>
         <button type="button" (click)="doneTodo(todo)">done</button>
