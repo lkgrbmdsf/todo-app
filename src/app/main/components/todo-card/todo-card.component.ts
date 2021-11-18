@@ -67,12 +67,14 @@ export class TodoCardComponent {
   }
 
   doneTodo(todo: Todo) {
+    this.currentTodo = todo;
+    this.currentTodo.isDone = true;
     this.isDone = true;
     for (let i = 0; i < this.todos.length; i++) {
-      if (this.todos[i].title === todo.title) {
+      if (this.todos[i].isDone) {
         this.todos.splice(i, 1);
       }
     }
-    this.doneTodos.push(todo);
+    this.doneTodos.push(this.currentTodo);
   }
 }
