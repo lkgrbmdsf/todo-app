@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DATE } from 'src/app/shared/const/const-values';
 import { DATA } from 'src/app/shared/data/todo-data';
 import { Todo } from 'src/app/shared/interfaces/todos-interface';
@@ -24,15 +24,48 @@ export class TodoCardComponent {
 
   doneTodos: Todo[] = [];
 
-  todoForm = this.fb.group({
-    title: ['', Validators.required],
-    description: ['', Validators.required],
-    isDone: [false, Validators.required],
+  todayDate = DATE;
+
+  todoForm: FormGroup = this.fb.group({
+    title: ['', [Validators.required, Validators.pattern(/^(?:\s*\S+(?:\s+\S+){0,3})?\s*$/)]],
+    description: ['', [Validators.maxLength(256), Validators.required]],
+    isDone: [false],
     deadlineDate: [DATE, Validators.required],
   });
 
+  // new FormGroup({
+  //   title: new FormControl('', [
+  //     Validators.required,
+  //     Validators.pattern(/^(?:\s*\S+(?:\s+\S+){0,3})?\s*$/),
+  //   ]),
+  //   description: new FormControl({ value: '', disabled: this.formTitle?.invalid }, [
+  //     Validators.maxLength(256),
+  //     Validators.required,
+  //   ]),
+  //   isDone: new FormControl(false),
+  //   deadlineDate: new FormControl(DATE, Validators.required),
+  // });
+
+  get formTitle() {
+    console.log(this.todoForm, this.todoForm.controls.formTitle);
+    return this.todoForm?.get('title');
+  }
+
+  get formDescription() {
+    return this.todoForm.get('description');
+  }
+
+  test() {
+    console.log(this.formTitle!.invalid);
+    console.log(document.querySelector('input[name=description]'));
+  }
+
+  // valTest(): ValidatorFn {
+  //   return (control: AbstractControl): { [key: string]: any } | null =>
+  //     control.value?  ? null : { wrongColor: control.value };
+  // }
+
   addTodo() {
-    console.log(this.todoForm.value);
     this.todos.push(this.todoForm.value);
   }
 
