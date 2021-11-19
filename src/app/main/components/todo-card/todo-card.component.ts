@@ -1,4 +1,6 @@
 import { Component, Input } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { DATE } from 'src/app/shared/const/const-values';
 import { DATA } from 'src/app/shared/data/todo-data';
 import { Todo } from 'src/app/shared/interfaces/todos-interface';
 
@@ -8,6 +10,8 @@ import { Todo } from 'src/app/shared/interfaces/todos-interface';
   styleUrls: ['./todo-card.component.scss'],
 })
 export class TodoCardComponent {
+  constructor(private fb: FormBuilder) {}
+
   @Input() isCreated: boolean = false;
 
   isEdit: boolean = false;
@@ -20,16 +24,16 @@ export class TodoCardComponent {
 
   doneTodos: Todo[] = [];
 
-  todoTitle: string = '';
+  todoForm = this.fb.group({
+    title: ['', Validators.required],
+    description: ['', Validators.required],
+    isDone: [false, Validators.required],
+    deadlineDate: [DATE, Validators.required],
+  });
 
-  todoDescription: string = '';
-
-  deadlineDate?: Date;
-
-  addTodo(title: string, description: string, deadline?: Date) {
-    const todo = { title: title, description: description, deadlineDate: deadline };
-    this.isCreated = false;
-    return this.todos.push(todo);
+  addTodo() {
+    console.log(this.todoForm.value);
+    this.todos.push(this.todoForm.value);
   }
 
   showDesc(todo: Todo): void {
@@ -59,7 +63,7 @@ export class TodoCardComponent {
     this.currentTodo = todo;
   }
 
-  submitTodo(title: string, description: string, deadline?: Date): void {
+  submitTodo(title: string, description: string, deadline: Date): void {
     this.isEdit = false;
 
     if (this.currentTodo) {
