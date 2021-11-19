@@ -33,19 +33,6 @@ export class TodoCardComponent {
     deadlineDate: [DATE, Validators.required],
   });
 
-  // new FormGroup({
-  //   title: new FormControl('', [
-  //     Validators.required,
-  //     Validators.pattern(/^(?:\s*\S+(?:\s+\S+){0,3})?\s*$/),
-  //   ]),
-  //   description: new FormControl({ value: '', disabled: this.formTitle?.invalid }, [
-  //     Validators.maxLength(256),
-  //     Validators.required,
-  //   ]),
-  //   isDone: new FormControl(false),
-  //   deadlineDate: new FormControl(DATE, Validators.required),
-  // });
-
   get formTitle() {
     console.log(this.todoForm, this.todoForm.controls.formTitle);
     return this.todoForm?.get('title');
@@ -54,16 +41,6 @@ export class TodoCardComponent {
   get formDescription() {
     return this.todoForm.get('description');
   }
-
-  test() {
-    console.log(this.formTitle!.invalid);
-    console.log(document.querySelector('input[name=description]'));
-  }
-
-  // valTest(): ValidatorFn {
-  //   return (control: AbstractControl): { [key: string]: any } | null =>
-  //     control.value?  ? null : { wrongColor: control.value };
-  // }
 
   addTodo() {
     this.todos.push(this.todoForm.value);
