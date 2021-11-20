@@ -20,11 +20,11 @@ export class TodoCardComponent {
 
   currentTodo?: Todo;
 
-  todos = DATA;
+  todos: Todo[] = DATA;
 
   doneTodos: Todo[] = [];
 
-  todayDate = DATE;
+  todayDate: string = DATE;
 
   todoForm: FormGroup = this.fb.group({
     title: ['', [Validators.required, Validators.pattern(/^(?:\s*\S+(?:\s+\S+){0,3})?\s*$/)]],
@@ -34,7 +34,6 @@ export class TodoCardComponent {
   });
 
   get formTitle() {
-    console.log(this.todoForm, this.todoForm.controls.formTitle);
     return this.todoForm?.get('title');
   }
 
