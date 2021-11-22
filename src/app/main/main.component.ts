@@ -11,4 +11,8 @@ export class MainComponent {
   createTodo(): void {
     this.isCreated = true;
   }
+
+  refresh(test: boolean) {
+    this.isCreated = test;
+  }
 }

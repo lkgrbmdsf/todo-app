@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DATE } from 'src/app/shared/const/const-values';
 import { DATA } from 'src/app/shared/data/todo-data';
@@ -13,6 +13,8 @@ export class TodoCardComponent {
   constructor(private fb: FormBuilder) {}
 
   @Input() isCreated: boolean = false;
+
+  @Output() makeChange = new EventEmitter<boolean>();
 
   isEdit: boolean = false;
 
@@ -43,6 +45,8 @@ export class TodoCardComponent {
 
   addTodo() {
     this.todos.push(this.todoForm.value);
+    this.isCreated = false;
+    this.makeChange.emit(this.isCreated);
   }
 
   showDesc(todo: Todo): void {
@@ -72,14 +76,8 @@ export class TodoCardComponent {
     this.currentTodo = todo;
   }
 
-  submitTodo(title: string, description: string, deadline: Date): void {
+  submitTodo(): void {
     this.isEdit = false;
-
-    if (this.currentTodo) {
-      this.currentTodo.title = title;
-      this.currentTodo.description = description;
-      this.currentTodo.deadlineDate = deadline;
-    }
   }
 
   doneTodo(todo: Todo) {

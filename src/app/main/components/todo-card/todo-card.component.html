@@ -21,19 +21,17 @@
   </form>
 </ng-container>
 
-<!-- <ng-container class="modal" *ngIf="isEdit">
-  <form class="modal">
+<ng-container *ngIf="isEdit">
+  <form class="modal" [formGroup]="todoForm">
     <label for="title">{{ currentTodo?.title }}</label>
-    <input type="text" name="title" [(ngModel)]="todoTitle" />
+    <input type="text" name="title" formControlName="title" />
     <label for="description">{{ currentTodo?.description }}</label>
-    <input type="text" name="description" [(ngModel)]="todoDescription" />
+    <input type="text" name="description" formControlName="description" />
     <label for="description">Todo deadline: </label>
-    <input type="date" name="description" [(ngModel)]="deadlineDate" />
-    <button type="button" (click)="submitTodo(todoTitle, todoDescription, deadlineDate)">
-      submit
-    </button>
+    <input type="date" name="description" formControlName="deadlineDate" />
+    <button type="button">submit</button>
   </form>
-</ng-container> -->
+</ng-container>
 
 <div class="todos">
   <ul>
