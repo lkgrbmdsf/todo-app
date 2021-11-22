@@ -16,7 +16,7 @@
 
     <fieldset class="input-wrapper" [disabled]="formTitle?.invalid">
       <label for="deadlineDate">Todo deadline: </label>
-      <input type="date" name="deadlineDate" formControlName="deadlineDate" [min]="todayDate" />
+      <input type="date" name="deadlineDate" formControlName="deadlineDate" [min]="todaysDate" />
     </fieldset>
 
     <button

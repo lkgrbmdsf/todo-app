@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { DATE } from 'src/app/shared/const/const-values';
+import { TODAYSDATE } from 'src/app/shared/const/const-values';
 import { DATA } from 'src/app/shared/data/todo-data';
 import { Todo } from 'src/app/shared/interfaces/todos-interface';
 
@@ -22,15 +22,13 @@ export class TodoCardComponent {
 
   todos: Todo[] = DATA;
 
-  doneTodos: Todo[] = [];
-
-  todayDate: string = DATE;
+  todaysDate: string = TODAYSDATE;
 
   todoForm: FormGroup = this.fb.group({
     title: ['', [Validators.required, Validators.pattern(/^(?:\s*\S+(?:\s+\S+){0,3})?\s*$/)]],
     description: ['', [Validators.maxLength(256), Validators.required]],
     isDone: [false],
-    deadlineDate: [DATE, Validators.required],
+    deadlineDate: [TODAYSDATE, Validators.required],
   });
 
   get formTitle(): AbstractControl {
@@ -52,7 +50,6 @@ export class TodoCardComponent {
   }
 
   submitEditTodo(): void {
-    console.log(this.formTitle?.value, this.currentTodo?.title);
     this.isEdit = false;
 
     if (this.currentTodo) {
