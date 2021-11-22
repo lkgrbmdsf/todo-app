@@ -44,15 +44,13 @@
   </ul>
 </div>
 
-<ng-container *ngIf="todos">
-  <div class="todos">
-    <h1>Done Todos</h1>
-    <ul class="done-todos">
-      <li *ngFor="let todo of todos | filterByDone">
-        <h2>{{ todo.title }}</h2>
-        <p>{{ todo.description }}</p>
-        <button type="button" (click)="deleteDoneTodo(todo)">delete</button>
-      </li>
-    </ul>
-  </div>
-</ng-container>
+<div class="todos">
+  <h1>Done Todos</h1>
+  <ul class="done-todos">
+    <li *ngFor="let todo of todos | filterByDone">
+      <h2>{{ todo.title }}</h2>
+      <p>{{ todo.description }}</p>
+      <button type="button" (click)="deleteTodo(todo)">delete</button>
+    </li>
+  </ul>
+</div>

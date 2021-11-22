@@ -18,8 +18,6 @@ export class TodoCardComponent {
 
   isEdit: boolean = false;
 
-  isDone: boolean = false;
-
   currentTodo?: Todo;
 
   todos: Todo[] = DATA;
@@ -77,31 +75,14 @@ export class TodoCardComponent {
     return this.todos;
   }
 
-  deleteDoneTodo(todo: Todo): Todo[] {
-    for (let i = 0; i < this.doneTodos.length; i++) {
-      if (this.doneTodos[i].title === todo.title) {
-        this.doneTodos.splice(i, 1);
-      }
-    }
-    return this.doneTodos;
-  }
-
   editTodo(todo: Todo): void {
     this.isEdit = !this.isEdit;
     this.currentTodo = todo;
   }
 
-  doneTodo(todo: Todo) {
+  doneTodo(todo: Todo): Todo[] {
     this.currentTodo = todo;
     this.currentTodo.isDone = true;
-    console.log(this.todos);
-    // console.log(this.todos.filter((td) => td.isDone));
-    // for (let i = 0; i < this.todos.length; i++) {
-    //   if (this.todos[i].isDone) {
-    //     this.todos.splice(i, 1);
-    //   }
-    // }
-    // this.doneTodos.push(this.currentTodo);
     return this.todos;
   }
 }
