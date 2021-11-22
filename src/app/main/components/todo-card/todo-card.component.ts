@@ -32,7 +32,7 @@ export class TodoCardComponent {
   });
 
   get formTitle(): AbstractControl {
-    return this.todoForm?.get('title') as FormGroup;
+    return this.todoForm.get('title') as FormGroup;
   }
 
   get formDescription(): AbstractControl {
