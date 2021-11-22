@@ -12,7 +12,7 @@ export class MainComponent {
     this.isCreated = true;
   }
 
-  refresh(test: boolean) {
-    this.isCreated = test;
+  refresh(childCreated: boolean) {
+    this.isCreated = childCreated;
   }
 }
