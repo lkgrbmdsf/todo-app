@@ -9,7 +9,7 @@ export class MainComponent {
   isCreated: boolean = false;
 
   createTodo(): void {
-    this.isCreated = true;
+    this.isCreated = !this.isCreated;
   }
 
   refresh(childCreated: boolean) {

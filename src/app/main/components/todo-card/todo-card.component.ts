@@ -58,9 +58,9 @@ export class TodoCardComponent {
     this.isEdit = false;
 
     if (this.currentTodo) {
-      this.currentTodo.title = this.formTitle?.value || this.currentTodo.title;
-      this.currentTodo.description = this.formDescription?.value || this.currentTodo.description;
-      this.currentTodo.deadlineDate = this.formDeadlineDate?.value || this.currentTodo.deadlineDate;
+      this.currentTodo.title = this.formTitle?.value;
+      this.currentTodo.description = this.formDescription?.value;
+      this.currentTodo.deadlineDate = this.formDeadlineDate?.value;
     }
   }
 
@@ -87,19 +87,21 @@ export class TodoCardComponent {
   }
 
   editTodo(todo: Todo): void {
-    this.isEdit = true;
+    this.isEdit = !this.isEdit;
     this.currentTodo = todo;
   }
 
-  doneTodo(todo: Todo): void {
+  doneTodo(todo: Todo) {
     this.currentTodo = todo;
     this.currentTodo.isDone = true;
-    this.isDone = true;
-    for (let i = 0; i < this.todos.length; i++) {
-      if (this.todos[i].isDone) {
-        this.todos.splice(i, 1);
-      }
-    }
-    this.doneTodos.push(this.currentTodo);
+    console.log(this.todos);
+    // console.log(this.todos.filter((td) => td.isDone));
+    // for (let i = 0; i < this.todos.length; i++) {
+    //   if (this.todos[i].isDone) {
+    //     this.todos.splice(i, 1);
+    //   }
+    // }
+    // this.doneTodos.push(this.currentTodo);
+    return this.todos;
   }
 }
