@@ -4,7 +4,7 @@
   <form class="modal" [formGroup]="todoForm">
     <label for="title"> {{ isEdit ? currentTodo?.title : 'Todo title: ' }}</label>
     <input type="text" name="title" formControlName="title" />
-    <div class="error-msg" *ngIf="formTitle?.invalid">name should be 1 to 4 words</div>
+    <div class="error-msg" *ngIf="formTitle.invalid">name should be 1 to 4 words</div>
 
     <label for="description">{{ isEdit ? currentTodo?.description : ' Todo description ' }}</label>
     <input
@@ -13,7 +13,7 @@
       formControlName="description"
       [attr.disabled]="formTitle.invalid ? '' : null"
     />
-    <div class="error-msg" *ngIf="formDescription!.invalid">up to 256 characters</div>
+    <div class="error-msg" *ngIf="formDescription.invalid">up to 256 characters</div>
 
     <label for="deadlineDate">Todo deadline: </label>
     <input
@@ -27,7 +27,7 @@
     <button
       type="button"
       (click)="isEdit ? submitEditTodo() : addTodo()"
-      [disabled]="!todoForm.valid"
+      [disabled]="todoForm.invalid"
     >
       submit
     </button>
@@ -55,8 +55,9 @@
     <li *ngFor="let todo of todos | filterByDone">
       <h2>{{ todo.title }}</h2>
       <p>{{ todo.description }}</p>
-      <p>Done at: {{ todo.deadlineDate | date: 'longDate' }}</p>
-      <button type="button" (click)="deleteTodo(todo)">delete</button>
+      <p>Deadline date: {{ todo.deadlineDate | date: 'MMM d' }}</p>
+      <p>Done at: {{ todaysDate | date: 'longDate' }}</p>
+      <button type="button done-button" (click)="deleteTodo(todo)">delete</button>
     </li>
   </ul>
 </div>

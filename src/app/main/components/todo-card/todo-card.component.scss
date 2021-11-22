@@ -46,7 +46,7 @@
       justify-content: center;
       align-items: center;
       width: 15em;
-      height: 10em;
+      min-height: 10em;
       margin: 10px;
       border-radius: 5px;
       border: 2px solid ghostwhite;
@@ -79,5 +79,8 @@
 .done-todos {
   li {
     background-color: rgb(209, 241, 161);
+  }
+  button {
+    margin: 5px;
   }
 }
