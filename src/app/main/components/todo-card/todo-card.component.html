@@ -1,13 +1,15 @@
 <ng-content></ng-content>
 
-<ng-container *ngIf="isCreated">
+<ng-container *ngIf="isCreated || isEdit">
   <form class="modal" [formGroup]="todoForm">
-    <label for="title">Todo title: </label>
+    <label for="title"> {{ isEdit ? currentTodo?.title : 'Todo title: ' }}</label>
     <input type="text" name="title" formControlName="title" />
     <div class="error-msg" *ngIf="formTitle?.invalid">name should be 1 to 4 words</div>
 
     <fieldset class="input-wrapper" [disabled]="formTitle?.invalid">
-      <label for="description">Todo description: </label>
+      <label for="description">{{
+        isEdit ? currentTodo?.description : ' Todo description '
+      }}</label>
       <input type="text" name="description" formControlName="description" />
     </fieldset>
     <div class="error-msg" *ngIf="formDescription!.invalid">up to 256 characters</div>
@@ -17,19 +19,13 @@
       <input type="date" name="deadlineDate" formControlName="deadlineDate" [min]="todayDate" />
     </fieldset>
 
-    <button type="button" (click)="addTodo()" [disabled]="!todoForm.valid">submit</button>
-  </form>
-</ng-container>
-
-<ng-container *ngIf="isEdit">
-  <form class="modal" [formGroup]="todoForm">
-    <label for="title">{{ currentTodo?.title }}</label>
-    <input type="text" name="title" formControlName="title" />
-    <label for="description">{{ currentTodo?.description }}</label>
-    <input type="text" name="description" formControlName="description" />
-    <label for="description">Todo deadline: </label>
-    <input type="date" name="description" formControlName="deadlineDate" />
-    <button type="button">submit</button>
+    <button
+      type="button"
+      (click)="isEdit ? submitEditTodo() : addTodo()"
+      [disabled]="!todoForm.valid"
+    >
+      submit
+    </button>
   </form>
 </ng-container>
 

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DATE } from 'src/app/shared/const/const-values';
 import { DATA } from 'src/app/shared/data/todo-data';
 import { Todo } from 'src/app/shared/interfaces/todos-interface';
@@ -35,18 +35,33 @@ export class TodoCardComponent {
     deadlineDate: [DATE, Validators.required],
   });
 
-  get formTitle() {
-    return this.todoForm?.get('title');
+  get formTitle(): AbstractControl {
+    return this.todoForm?.get('title') as FormGroup;
   }
 
-  get formDescription() {
-    return this.todoForm.get('description');
+  get formDescription(): AbstractControl {
+    return this.todoForm.get('description') as FormGroup;
   }
 
-  addTodo() {
+  get formDeadlineDate(): AbstractControl {
+    return this.todoForm.get('deadlineDate') as FormGroup;
+  }
+
+  addTodo(): void {
     this.todos.push(this.todoForm.value);
     this.isCreated = false;
     this.makeChange.emit(this.isCreated);
+  }
+
+  submitEditTodo(): void {
+    console.log(this.formTitle?.value, this.currentTodo?.title);
+    this.isEdit = false;
+
+    if (this.currentTodo) {
+      this.currentTodo.title = this.formTitle?.value || this.currentTodo.title;
+      this.currentTodo.description = this.formDescription?.value || this.currentTodo.description;
+      this.currentTodo.deadlineDate = this.formDeadlineDate?.value || this.currentTodo.deadlineDate;
+    }
   }
 
   showDesc(todo: Todo): void {
@@ -76,11 +91,7 @@ export class TodoCardComponent {
     this.currentTodo = todo;
   }
 
-  submitTodo(): void {
-    this.isEdit = false;
-  }
-
-  doneTodo(todo: Todo) {
+  doneTodo(todo: Todo): void {
     this.currentTodo = todo;
     this.currentTodo.isDone = true;
     this.isDone = true;
