@@ -36,9 +36,11 @@
 
 <div class="todos">
   <ul>
-    <li *ngFor="let todo of todos | filterByDefault">
-      <h2 (click)="showDesc(todo)">{{ todo.title }}</h2>
-      <p [class.extended]="todo === currentTodo" class="description">{{ todo.description }}</p>
+    <li *ngFor="let todo of todos | filterByDefault" (click)="showDesc(todo)">
+      <h2 class="title">{{ todo.title }}</h2>
+      <p class="description">
+        {{ todo.isShown ? todo.description : '' }}
+      </p>
       <p>{{ todo.deadlineDate | date: 'longDate' }}</p>
       <div class="buttons">
         <button type="button" (click)="deleteTodo(todo)">delete</button>

@@ -35,6 +35,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 
   ul {
     list-style: none;
@@ -66,14 +67,6 @@
   button {
     margin: 5px;
   }
-}
-
-.description {
-  visibility: hidden;
-}
-
-.extended {
-  visibility: visible;
 }
 
 .done-todos {

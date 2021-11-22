@@ -28,6 +28,7 @@ export class TodoCardComponent {
     title: ['', [Validators.required, Validators.pattern(/^(?:\s*\S+(?:\s+\S+){0,3})?\s*$/)]],
     description: ['', [Validators.maxLength(256), Validators.required]],
     isDone: [false],
+    isShown: [false],
     deadlineDate: [TODAYSDATE, Validators.required],
   });
 
@@ -61,6 +62,7 @@ export class TodoCardComponent {
 
   showDesc(todo: Todo): void {
     this.currentTodo = todo;
+    this.currentTodo.isShown = !this.currentTodo.isShown;
   }
 
   deleteTodo(todo: Todo): Todo[] {
