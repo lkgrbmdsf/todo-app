@@ -15,7 +15,7 @@ export class TodoCardComponent {
 
   @Input() isEdit: boolean = false;
 
-  @Input() currentTodo?: Todo;
+  currentTodo?: Todo;
 
   todos: Todo[] = DATA;
 

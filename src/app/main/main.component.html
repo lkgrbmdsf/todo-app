@@ -6,7 +6,6 @@
 ></app-modal-window>
 <app-todo-card
   [isEdit]="isEdit"
-  [currentTodo]="currentTodo"
   (makeChange)="refresh($event)"
   (todoEmit)="currentTodoEmit($event)"
 >

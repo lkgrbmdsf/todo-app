@@ -1,7 +1,7 @@
 <ng-container *ngIf="isEdit || isCreated">
   <form class="modal" [formGroup]="todoForm">
     <label for="title"> {{ isEdit ? currentTodo?.title : 'Todo title: ' }}</label>
-    <input type="text" name="title" formControlName="title" />
+    <input type="text" name="title" formControlName="title" autocomplete="off" />
     <div class="error-msg" *ngIf="formTitle.invalid">name should be 1 to 4 words</div>
 
     <label for="description">{{ isEdit ? currentTodo?.description : ' Todo description ' }}</label>
@@ -9,6 +9,7 @@
       type="text"
       name="description"
       formControlName="description"
+      autocomplete="off"
       [attr.disabled]="formTitle.invalid ? '' : null"
     />
     <div class="error-msg" *ngIf="formDescription.invalid">up to 256 characters</div>
