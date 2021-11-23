@@ -1,39 +1,5 @@
 <ng-content></ng-content>
 
-<ng-container *ngIf="isCreated || isEdit">
-  <form class="modal" [formGroup]="todoForm">
-    <label for="title"> {{ isEdit ? currentTodo?.title : 'Todo title: ' }}</label>
-    <input type="text" name="title" formControlName="title" />
-    <div class="error-msg" *ngIf="formTitle.invalid">name should be 1 to 4 words</div>
-
-    <label for="description">{{ isEdit ? currentTodo?.description : ' Todo description ' }}</label>
-    <input
-      type="text"
-      name="description"
-      formControlName="description"
-      [attr.disabled]="formTitle.invalid ? '' : null"
-    />
-    <div class="error-msg" *ngIf="formDescription.invalid">up to 256 characters</div>
-
-    <label for="deadlineDate">Todo deadline: </label>
-    <input
-      type="date"
-      name="deadlineDate"
-      formControlName="deadlineDate"
-      [min]="todaysDate"
-      [attr.disabled]="formTitle.invalid ? '' : null"
-    />
-
-    <button
-      type="button"
-      (click)="isEdit ? submitEditTodo() : addTodo()"
-      [disabled]="todoForm.invalid"
-    >
-      submit
-    </button>
-  </form>
-</ng-container>
-
 <div class="todos">
   <ul>
     <li *ngFor="let todo of todos | filterByDefault" (click)="showDesc(todo)">
