@@ -7,8 +7,6 @@ import { Todo } from '../interfaces/todos-interface';
 })
 export class SortByDonePipe implements PipeTransform {
   transform(todos: Todo[], isSorted: boolean): Todo[] {
-    return isSorted
-      ? todos.sort((todo) => (todo.isDone ? -1 : 1))
-      : todos.sort((todo) => (todo.isDone ? 1 : -1));
+    return isSorted ? todos.sort((todo) => (todo.isDone ? -1 : 1)) : todos;
   }
 }

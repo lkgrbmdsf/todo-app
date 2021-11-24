@@ -11,6 +11,13 @@
     display: grid;
     grid-template-columns: repeat(3, 0fr);
   }
+
+  .sort-wrapper {
+    display: flex;
+    p {
+      margin-left: 10px;
+    }
+  }
 }
 
 .buttons {

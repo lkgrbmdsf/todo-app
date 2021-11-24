@@ -1,8 +1,11 @@
 <ng-content></ng-content>
 
-<button type="button" (click)="sort()">sort</button>
-
 <div class="todo-wrapper">
+  <div class="sort-wrapper">
+    <button type="button" (click)="sort()">sort by done</button>
+    <p>{{ isSorted ? 'enabled' : 'disabled' }}</p>
+  </div>
+
   <ul>
     <li
       *ngFor="let todo of todos | sortByDone: isSorted"
@@ -14,6 +17,7 @@
         {{ todo.isShown ? todo.description : '' }}
       </p>
       <p>{{ todo.deadlineDate | date: 'dd/MM/yyyy' }}</p>
+
       <div class="buttons">
         <button type="button" (click)="deleteTodo(todo)">delete</button>
         <button *ngIf="!todo.isDone" type="button" (click)="doneTodo(todo)">done</button>
