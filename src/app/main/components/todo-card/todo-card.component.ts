@@ -21,6 +21,8 @@ export class TodoCardComponent {
 
   todaysDate: string = TODAYSDATE;
 
+  isSorted: boolean = false;
+
   showDesc(todo: Todo): void {
     this.currentTodo = todo;
     this.currentTodo.isShown = !this.currentTodo.isShown;
@@ -46,5 +48,9 @@ export class TodoCardComponent {
     this.currentTodo = todo;
     this.currentTodo.isDone = true;
     return this.todos;
+  }
+
+  sort() {
+    this.isSorted = !this.isSorted;
   }
 }
