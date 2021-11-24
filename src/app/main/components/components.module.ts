@@ -5,9 +5,16 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FilterByDonePipe } from 'src/app/shared/pipes/filter-by-done.pipe';
 import { FilterByDefaultPipe } from 'src/app/shared/pipes/filter-by-default.pipe';
 import { ModalWindowComponent } from './modal-window/modal-window.component';
+import { SortByDonePipe } from 'src/app/shared/pipes/sort-by-done.pipe';
 
 @NgModule({
-  declarations: [TodoCardComponent, FilterByDonePipe, FilterByDefaultPipe, ModalWindowComponent],
+  declarations: [
+    TodoCardComponent,
+    FilterByDonePipe,
+    FilterByDefaultPipe,
+    ModalWindowComponent,
+    SortByDonePipe,
+  ],
   imports: [ReactiveFormsModule, CommonModule, FormsModule],
   exports: [TodoCardComponent, ModalWindowComponent],
 })

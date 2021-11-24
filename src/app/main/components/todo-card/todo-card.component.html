@@ -3,7 +3,7 @@
 <div class="todo-wrapper">
   <ul>
     <li
-      *ngFor="let todo of todos"
+      *ngFor="let todo of todos | sortByDone"
       (click)="showDesc(todo)"
       [ngClass]="todo.isDone ? 'todos done-todos' : 'todos'"
     >
@@ -20,7 +20,6 @@
     </li>
   </ul>
 </div>
-
 
 <!--
 <div class="todos">
