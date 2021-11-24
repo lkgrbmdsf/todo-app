@@ -1,8 +1,12 @@
 <ng-content></ng-content>
 
-<div class="todos">
+<div class="todo-wrapper">
   <ul>
-    <li *ngFor="let todo of todos | filterByDefault" (click)="showDesc(todo)">
+    <li
+      *ngFor="let todo of todos"
+      (click)="showDesc(todo)"
+      [ngClass]="todo.isDone ? 'todos done-todos' : 'todos'"
+    >
       <h2 class="title">{{ todo.title }}</h2>
       <p class="description">
         {{ todo.isShown ? todo.description : '' }}
@@ -10,13 +14,15 @@
       <p>{{ todo.deadlineDate | date: 'dd/MM/yyyy' }}</p>
       <div class="buttons">
         <button type="button" (click)="deleteTodo(todo)">delete</button>
-        <button type="button" (click)="doneTodo(todo)">done</button>
-        <button type="button" (click)="editTodo(todo)">edit</button>
+        <button *ngIf="!todo.isDone" type="button" (click)="doneTodo(todo)">done</button>
+        <button *ngIf="!todo.isDone" type="button" (click)="editTodo(todo)">edit</button>
       </div>
     </li>
   </ul>
 </div>
 
+
+<!--
 <div class="todos">
   <h1>Done Todos</h1>
   <ul class="done-todos">
@@ -28,4 +34,4 @@
       <button type="button done-button" (click)="deleteTodo(todo)">delete</button>
     </li>
   </ul>
-</div>
+</div> -->
