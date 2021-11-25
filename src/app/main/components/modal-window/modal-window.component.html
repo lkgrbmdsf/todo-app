@@ -1,7 +1,14 @@
 <ng-container *ngIf="isEdit || isCreated">
   <form class="modal" [formGroup]="todoForm">
     <label for="title"> {{ isEdit ? currentTodo?.title : 'Todo title: ' }}</label>
-    <input type="text" name="title" formControlName="title" autocomplete="off" />
+    <input
+      class="test"
+      type="text"
+      name="title"
+      formControlName="title"
+      autocomplete="off"
+      [appBorderValidating]="formTitle.invalid"
+    />
     <div class="error-msg" *ngIf="formTitle.invalid">name should be 1 to 4 words</div>
 
     <label for="description">{{ isEdit ? currentTodo?.description : ' Todo description ' }}</label>

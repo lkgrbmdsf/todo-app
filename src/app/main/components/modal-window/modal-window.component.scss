@@ -8,14 +8,6 @@
   top: 85px;
   left: 0;
 
-  .input-wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: baseline;
-    border: none;
-  }
-
   .error-msg {
     width: 150px;
   }
@@ -26,5 +18,9 @@
   }
   input {
     width: 150px;
+  }
+
+  .test:focus {
+    outline: none;
   }
 }
