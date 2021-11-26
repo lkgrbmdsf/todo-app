@@ -1,19 +1,30 @@
 import { Directive, ElementRef, Input } from '@angular/core';
 
 @Directive({
-  selector: '[appBorderValidating]',
+  selector: '[appTitleBorder]',
 })
-export class BorderValidatingDirective {
+export class TitleBordersDirective {
   constructor(private el: ElementRef) {
     this.el.nativeElement.style.border = 'none';
     this.el.nativeElement.style.borderRadius = '3px';
   }
 
-  @Input() set appBorderValidating(isValid: boolean) {
-    if (!isValid) {
+  @Input() set appTitleBorder(isInvalid: boolean) {
+    if (!isInvalid) {
       this.el.nativeElement.style.outline = '2px solid green';
-    } else if (isValid) {
+    } else {
       this.el.nativeElement.style.outline = '2px solid red';
     }
+  }
+}
+
+@Directive({
+  selector: '[appDescriptionBorder]',
+})
+export class DescBordersDirective {
+  constructor(private el: ElementRef) {}
+
+  @Input() set appDescriptionDirective(isInvalid: boolean) {
+    //TODO: enabled directive borders
   }
 }

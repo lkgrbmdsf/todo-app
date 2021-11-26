@@ -1,6 +1,6 @@
 <ng-content></ng-content>
 
-<div class="todo-wrapper">
+<div *ngIf="todos.length" class="todo-wrapper">
   <div class="sort-wrapper">
     <button type="button" (click)="sort()">sort by done</button>
     <p>{{ isSorted ? 'enabled' : 'disabled' }}</p>

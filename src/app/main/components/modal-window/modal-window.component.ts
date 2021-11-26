@@ -26,11 +26,15 @@ export class ModalWindowComponent {
 
   todoForm: FormGroup = this.fb.group({
     title: ['', [Validators.required, Validators.pattern(/^(?:\s*\S+(?:\s+\S+){0,3})?\s*$/)]],
-    description: ['', [Validators.maxLength(256), Validators.required]],
+    description: ['', [Validators.required, Validators.maxLength(256)]],
     isDone: [false],
     isShown: [false],
     deadlineDate: [TODAYSDATE, Validators.required],
   });
+
+  test() {
+    console.log('test');
+  }
 
   get formTitle(): AbstractControl {
     return this.todoForm.get('title') as FormGroup;
