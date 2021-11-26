@@ -5,11 +5,18 @@
   align-items: baseline;
   margin-left: 100px;
   position: fixed;
-  top: 85px;
+  top: 110px;
   left: 0;
+  border: 1px solid whitesmoke;
+
+  background-color: white;
 
   .error-msg {
     width: 150px;
+  }
+
+  button {
+    margin-bottom: 20px;
   }
 
   button,
@@ -23,4 +30,8 @@
   .test:focus {
     outline: none;
   }
+}
+
+.modal * {
+  margin: 0px 20px;
 }
