@@ -18,6 +18,8 @@
       formControlName="description"
       autocomplete="off"
       [attr.disabled]="formTitle.invalid ? '' : null"
+      [formTitle]="formTitle.valid"
+      [appDescriptionBorder]="formDescription.valid"
     />
     <div class="error-msg" *ngIf="formDescription.invalid">up to 256 characters</div>
 

@@ -32,10 +32,6 @@ export class ModalWindowComponent {
     deadlineDate: [TODAYSDATE, Validators.required],
   });
 
-  test() {
-    console.log('test');
-  }
-
   get formTitle(): AbstractControl {
     return this.todoForm.get('title') as FormGroup;
   }

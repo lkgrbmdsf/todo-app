@@ -6,14 +6,14 @@ import { Directive, ElementRef, Input } from '@angular/core';
 export class TitleBordersDirective {
   constructor(private el: ElementRef) {
     this.el.nativeElement.style.border = 'none';
-    this.el.nativeElement.style.borderRadius = '3px';
+    this.el.nativeElement.style.borderRadius = '1px';
   }
 
   @Input() set appTitleBorder(isInvalid: boolean) {
     if (!isInvalid) {
-      this.el.nativeElement.style.outline = '2px solid green';
+      this.el.nativeElement.style.outline = '1px solid green';
     } else {
-      this.el.nativeElement.style.outline = '2px solid red';
+      this.el.nativeElement.style.outline = '1px solid red';
     }
   }
 }
@@ -24,7 +24,19 @@ export class TitleBordersDirective {
 export class DescBordersDirective {
   constructor(private el: ElementRef) {}
 
-  @Input() set appDescriptionDirective(isInvalid: boolean) {
-    //TODO: enabled directive borders
+  @Input() formTitle?: boolean;
+
+  @Input() set appDescriptionBorder(descIsValid: boolean) {
+    if (this.formTitle) {
+      if (descIsValid) {
+        this.el.nativeElement.style.border = 'none';
+        this.el.nativeElement.style.borderRadius = '1px';
+        this.el.nativeElement.style.outline = '1px solid green';
+      } else {
+        this.el.nativeElement.style.border = 'none';
+        this.el.nativeElement.style.borderRadius = '1px';
+        this.el.nativeElement.style.outline = '1px solid red';
+      }
+    }
   }
 }
