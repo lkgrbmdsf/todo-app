@@ -2,15 +2,19 @@
 
 <div *ngIf="todos.length" class="todo-wrapper">
   <div class="sort-wrapper">
-    <button type="button" (click)="sort()">sort by done</button>
-    <p>{{ isSorted ? 'enabled' : 'disabled' }}</p>
+    <button type="button" (click)="sort()">
+      {{ isSorted ? 'back to all' : 'show only done todos' }}
+    </button>
   </div>
+
+  <!-- TODO: вынести на уровень выше + нгФор тож -->
 
   <ul>
     <li
-      *ngFor="let todo of todos | sortByDone: isSorted"
+      class="todos"
+      *ngFor="let todo of todos | filterByDone: isSorted"
       (click)="showDesc(todo)"
-      [ngClass]="todo.isDone ? 'todos done-todos' : 'todos'"
+      [ngClass]="todo.isDone ? 'done-todos' : ''"
     >
       <h2 class="title">{{ todo.title }}</h2>
       <p class="description">
