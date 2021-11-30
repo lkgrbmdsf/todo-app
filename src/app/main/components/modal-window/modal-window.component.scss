@@ -2,8 +2,9 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: baseline;
+  align-items: stretch;
   margin-left: 100px;
+  padding: 10px 20px;
   position: fixed;
   top: 110px;
   left: 0;
@@ -16,22 +17,23 @@
   }
 
   button {
-    margin-bottom: 20px;
+    text-align: center;
+    width: min-content;
   }
 
-  button,
   label {
-    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
   }
   input {
     width: 150px;
+    margin-left: 15px;
   }
 
   .test:focus {
     outline: none;
   }
-}
-
-.modal * {
-  margin: 0px 20px;
 }

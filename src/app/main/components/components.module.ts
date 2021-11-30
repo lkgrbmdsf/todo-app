@@ -3,18 +3,9 @@ import { CommonModule } from '@angular/common';
 import { TodoCardComponent } from './todo-card/todo-card.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ModalWindowComponent } from './modal-window/modal-window.component';
-import {
-  DescBordersDirective,
-  TitleBordersDirective,
-} from 'src/app/shared/directives/border-validating.directive';
 
 @NgModule({
-  declarations: [
-    TodoCardComponent,
-    ModalWindowComponent,
-    TitleBordersDirective,
-    DescBordersDirective,
-  ],
+  declarations: [TodoCardComponent, ModalWindowComponent],
   imports: [ReactiveFormsModule, CommonModule, FormsModule],
   exports: [TodoCardComponent, ModalWindowComponent],
 })

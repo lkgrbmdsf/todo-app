@@ -1,46 +1,30 @@
-  <form class="modal" [formGroup]="todoForm">
-    <label for="title"> {{ isEdit ? currentTodo?.title : 'Todo title: ' }}</label>
-    <input
-      class="test"
-      type="text"
-      name="title"
-      formControlName="title"
-      autocomplete="off"
-      [appTitleBorder]="formTitle.invalid"
-    />
-    <!-- TODO: ngclass -->
-    <div class="error-msg" *ngIf="formTitle.invalid">{{ 'test' }}</div>
-    <!-- TODO: pass error type -->
+<form class="modal" [formGroup]="todoForm">
+  <label for="title">
+    {{ isEdit ? currentTodo?.title : 'Todo title: ' }}
+    <input class="test" type="text" name="title" formControlName="title" autocomplete="off"
+  /></label>
 
-    <!-- TODO: вынести тож -->
+  <!-- TODO: ngclass -->
 
-    <label for="description">{{ isEdit ? currentTodo?.description : ' Todo description ' }}</label>
-    <input
-      type="text"
-      name="description"
-      formControlName="description"
-      autocomplete="off"
-      [attr.disabled]="formTitle.invalid ? '' : null"
-      [formTitle]="formTitle"
-      [appDescriptionBorder]="formDescription.valid"
-    />
-    <div class="error-msg" *ngIf="formDescription.invalid">up to 256 characters</div>
+  <!-- TODO: вынести тож -->
 
-    <label for="deadlineDate">Todo deadline: </label>
-    <input
-      type="date"
-      name="deadlineDate"
-      formControlName="deadlineDate"
-      [min]="todaysDate"
-      [attr.disabled]="formTitle.invalid ? '' : null"
-    />
+  <label for="description"
+    >{{ isEdit ? currentTodo?.description : ' Todo description: ' }}
+    <input type="text" name="description" formControlName="description" autocomplete="off" />
+  </label>
 
-    <!-- TODO: input in label -->
-    <button
-      type="button"
-      (click)="isEdit ? submitEditTodo() : addTodo()"
-      [disabled]="todoForm.invalid"
-    >
-      submit
-    </button>
-  </form>
+  <label for="deadlineDate"
+    >Todo deadline:
+    <input type="date" name="deadlineDate" formControlName="deadlineDate" [min]="todaysDate" />
+  </label>
+
+  <button type="button" (click)="isEdit ? submitEditTodo() : addTodo()">submit</button>
+
+  <ng-container *ngIf="formTitle.invalid">
+    <div>
+      {{ formTitle.errors?.['required'] ? "надо поле заполнить" : formTitle.errors?.['forbidden'] ? 'меньше слов надо' : formTitle.errors}}
+    </div>
+  </ng-container>
+
+  <!-- TODO: make error type for each input -->
+</form>

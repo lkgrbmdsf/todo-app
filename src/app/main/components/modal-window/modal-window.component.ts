@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { TODAYSDATE } from 'src/app/shared/const/const-values';
 import { DATA } from 'src/app/shared/data/todo-data';
 import { Todo } from 'src/app/shared/interfaces/todos-interface';
@@ -25,14 +25,15 @@ export class ModalWindowComponent {
   todaysDate: string = TODAYSDATE;
 
   todoForm: FormGroup = this.fb.group({
-    title: ['', [Validators.required, Validators.pattern(/^(?:\s*\S+(?:\s+\S+){0,3})?\s*$/)]],
+    title: [
+      '',
+      [Validators.required, this.forbiddenNameValidator(/^(?:\s*\S+(?:\s+\S+){0,3})?\s*$/)],
+    ],
     description: ['', [Validators.required, Validators.maxLength(256)]],
     isDone: [false],
     isShown: [false],
     deadlineDate: [TODAYSDATE, Validators.required],
   });
-
-  // TODO: custom validators
 
   get formTitle(): FormGroup {
     return this.todoForm.get('title') as FormGroup;
@@ -44,6 +45,13 @@ export class ModalWindowComponent {
 
   get formDeadlineDate(): FormGroup {
     return this.todoForm.get('deadlineDate') as FormGroup;
+  }
+
+  forbiddenNameValidator(nameRe: RegExp) {
+    return (control: FormGroup): ValidationErrors | null => {
+      const accepted = nameRe.test(control.value);
+      return accepted ? null : { forbidden: { value: control.value } };
+    };
   }
 
   addTodo(): void {
@@ -63,7 +71,5 @@ export class ModalWindowComponent {
     }
   }
 }
-
-// TODO: isEdit ne nado menyat
 
 // TODO: make directive by click
