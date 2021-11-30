@@ -1,16 +1,30 @@
+<div class="main">
+  <h1>Todo app</h1>
+  <button type="button" (click)="createTodo()">create Todo</button>
+</div>
+
 <app-modal-window
   [isEdit]="isEdit"
   [isCreated]="isCreated"
   [currentTodo]="currentTodo"
   (makeChange)="refresh($event)"
 ></app-modal-window>
-<app-todo-card
-  [isEdit]="isEdit"
-  (makeChange)="refresh($event)"
-  (todoEmit)="currentTodoEmit($event)"
->
-  <div class="main">
-    <h1>Todo app</h1>
-    <button type="button" (click)="createTodo()">create Todo</button>
+
+<div *ngIf="todos.length" class="list">
+  <div class="sort-wrapper">
+    <button type="button" (click)="sort()">
+      {{ isSorted ? 'back to all' : 'show only done todos' }}
+    </button>
   </div>
-</app-todo-card>
+
+  <div class="todo-wrapper">
+    <app-todo-card
+      [isEdit]="isEdit"
+      [todo]="todo"
+      (makeChange)="refresh($event)"
+      (todoEmit)="currentTodoEmit($event)"
+      *ngFor="let todo of todos | filterByDone: isSorted"
+    >
+    </app-todo-card>
+  </div>
+</div>

@@ -17,6 +17,8 @@ export class TodoCardComponent {
 
   currentTodo?: Todo;
 
+  @Input() todo!: Todo;
+
   todos: Todo[] = DATA;
 
   todaysDate: string = TODAYSDATE;
@@ -49,8 +51,6 @@ export class TodoCardComponent {
     this.currentTodo.isDone = true;
     return this.todos;
   }
-
-  sort() {
-    this.isSorted = !this.isSorted;
-  }
 }
+
+//TODO male sort be fiter

@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { TodoCardComponent } from './todo-card/todo-card.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ModalWindowComponent } from './modal-window/modal-window.component';
-import { FilterByDonePipe } from 'src/app/shared/pipes/sort-by-done.pipe';
 import {
   DescBordersDirective,
   TitleBordersDirective,
@@ -13,7 +12,6 @@ import {
   declarations: [
     TodoCardComponent,
     ModalWindowComponent,
-    FilterByDonePipe,
     TitleBordersDirective,
     DescBordersDirective,
   ],

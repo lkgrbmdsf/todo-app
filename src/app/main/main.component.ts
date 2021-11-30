@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DATA } from '../shared/data/todo-data';
 import { Todo } from '../shared/interfaces/todos-interface';
 
 @Component({
@@ -11,7 +12,11 @@ export class MainComponent {
 
   isEdit: boolean = false;
 
+  isSorted: boolean = false;
+
   currentTodo?: Todo;
+
+  todos: Todo[] = DATA;
 
   createTodo(): void {
     this.isCreated = !this.isCreated;
@@ -23,5 +28,9 @@ export class MainComponent {
 
   currentTodoEmit(todo: Todo) {
     this.currentTodo = todo;
+  }
+
+  sort() {
+    this.isSorted = !this.isSorted;
   }
 }
