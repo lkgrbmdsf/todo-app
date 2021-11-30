@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TODAYSDATE } from 'src/app/shared/const/const-values';
 import { DATA } from 'src/app/shared/data/todo-data';
 import { Todo } from 'src/app/shared/interfaces/todos-interface';
@@ -32,15 +32,17 @@ export class ModalWindowComponent {
     deadlineDate: [TODAYSDATE, Validators.required],
   });
 
-  get formTitle(): AbstractControl {
+  // TODO: custom validators
+
+  get formTitle(): FormGroup {
     return this.todoForm.get('title') as FormGroup;
   }
 
-  get formDescription(): AbstractControl {
+  get formDescription(): FormGroup {
     return this.todoForm.get('description') as FormGroup;
   }
 
-  get formDeadlineDate(): AbstractControl {
+  get formDeadlineDate(): FormGroup {
     return this.todoForm.get('deadlineDate') as FormGroup;
   }
 
@@ -61,3 +63,7 @@ export class ModalWindowComponent {
     }
   }
 }
+
+// TODO: isEdit ne nado menyat
+
+// TODO: make directive by click
