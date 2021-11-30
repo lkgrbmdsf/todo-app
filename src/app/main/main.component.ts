@@ -26,6 +26,10 @@ export class MainComponent {
     this.isEdit = edit;
   }
 
+  refreshCreated(isCreated: boolean) {
+    this.isCreated = isCreated;
+  }
+
   currentTodoEmit(todo: Todo) {
     this.currentTodo = todo;
   }

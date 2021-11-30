@@ -1,4 +1,3 @@
-<ng-container *ngIf="isEdit || isCreated">
   <form class="modal" [formGroup]="todoForm">
     <label for="title"> {{ isEdit ? currentTodo?.title : 'Todo title: ' }}</label>
     <input
@@ -9,7 +8,11 @@
       autocomplete="off"
       [appTitleBorder]="formTitle.invalid"
     />
-    <div class="error-msg" *ngIf="formTitle.invalid">name should be 1 to 4 words</div>
+    <!-- TODO: ngclass -->
+    <div class="error-msg" *ngIf="formTitle.invalid">{{ 'test' }}</div>
+    <!-- TODO: pass error type -->
+
+    <!-- TODO: вынести тож -->
 
     <label for="description">{{ isEdit ? currentTodo?.description : ' Todo description ' }}</label>
     <input
@@ -18,7 +21,7 @@
       formControlName="description"
       autocomplete="off"
       [attr.disabled]="formTitle.invalid ? '' : null"
-      [formTitle]="formTitle.valid"
+      [formTitle]="formTitle"
       [appDescriptionBorder]="formDescription.valid"
     />
     <div class="error-msg" *ngIf="formDescription.invalid">up to 256 characters</div>
@@ -32,6 +35,7 @@
       [attr.disabled]="formTitle.invalid ? '' : null"
     />
 
+    <!-- TODO: input in label -->
     <button
       type="button"
       (click)="isEdit ? submitEditTodo() : addTodo()"
@@ -40,4 +44,3 @@
       submit
     </button>
   </form>
-</ng-container>

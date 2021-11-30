@@ -52,5 +52,3 @@ export class TodoCardComponent {
     return this.todos;
   }
 }
-
-//TODO male sort be fiter

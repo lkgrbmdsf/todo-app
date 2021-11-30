@@ -3,14 +3,17 @@
   <button type="button" (click)="createTodo()">create Todo</button>
 </div>
 
-<app-modal-window
-  [isEdit]="isEdit"
-  [isCreated]="isCreated"
-  [currentTodo]="currentTodo"
-  (makeChange)="refresh($event)"
-></app-modal-window>
+<ng-container *ngIf="isEdit || isCreated">
+  <app-modal-window
+    [isEdit]="isEdit"
+    [isCreated]="isCreated"
+    [currentTodo]="currentTodo"
+    (makeChange)="refresh($event)"
+    (makeChange)="refreshCreated($event)"
+  ></app-modal-window
+></ng-container>
 
-<div *ngIf="todos.length" class="list">
+<div *ngIf="todos.length; else elseBlock" class="list">
   <div class="sort-wrapper">
     <button type="button" (click)="sort()">
       {{ isSorted ? 'back to all' : 'show only done todos' }}
@@ -28,3 +31,7 @@
     </app-todo-card>
   </div>
 </div>
+
+<ng-template #elseBlock>
+  <div class="list">no todos are currently in the list</div>
+</ng-template>
