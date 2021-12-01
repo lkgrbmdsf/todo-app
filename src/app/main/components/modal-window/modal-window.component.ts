@@ -18,6 +18,8 @@ export class ModalWindowComponent {
 
   @Output() makeChange = new EventEmitter<boolean>();
 
+  isTriggered: boolean = false;
+
   todos: Todo[] = DATA;
 
   todaysDate: string = TODAYSDATE;
@@ -55,9 +57,15 @@ export class ModalWindowComponent {
   }
 
   addTodo(): void {
-    this.todos.push(this.todoForm.value);
-    this.isCreated = false;
-    this.makeChange.emit(this.isCreated);
+    this.isTriggered = true;
+    if (this.isTriggered) {
+      if (this.todoForm.valid) {
+        this.todos.push(this.todoForm.value);
+        this.isCreated = false;
+        this.makeChange.emit(this.isCreated);
+        this.isTriggered = false;
+      }
+    }
   }
 
   submitEditTodo(): void {
