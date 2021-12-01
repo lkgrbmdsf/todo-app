@@ -10,8 +10,6 @@ import { Todo } from 'src/app/shared/interfaces/todos-interface';
   styleUrls: ['./modal-window.component.scss'],
 })
 export class ModalWindowComponent {
-  constructor(private fb: FormBuilder) {}
-
   @Input() isEdit: boolean = false;
 
   @Input() isCreated: boolean = false;
@@ -34,6 +32,8 @@ export class ModalWindowComponent {
     isShown: [false],
     deadlineDate: [TODAYSDATE, Validators.required],
   });
+
+  constructor(private fb: FormBuilder) {}
 
   get formTitle(): FormGroup {
     return this.todoForm.get('title') as FormGroup;
