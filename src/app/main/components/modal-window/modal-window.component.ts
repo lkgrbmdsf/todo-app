@@ -88,7 +88,7 @@ export class ModalWindowComponent {
       ? 'should not be empty'
       : this.formTitle.errors?.forbidden
       ? 'should be 4 or less words'
-      : `${'unknown error' + console.log(this.formTitle.errors)}`;
+      : `${'unknown error: ' + this.formTitle.errors}`;
   }
 
   descErrorHandler() {
@@ -96,7 +96,7 @@ export class ModalWindowComponent {
       ? 'should not be empty'
       : this.formDescription.errors?.maxlength
       ? 'should me less then 256 chars'
-      : `${'unknown error' + console.log(this.formDescription.errors)}`;
+      : `${'unknown error: ' + this.formDescription.errors}`;
   }
   // TODO: vy toz podtyagivaites rebyata
 }
