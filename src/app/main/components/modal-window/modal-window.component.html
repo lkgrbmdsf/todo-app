@@ -10,9 +10,9 @@
       [ngStyle]="{
         border:
           formTitle.valid && isTriggered
-            ? '1px solid green'
+            ? '2px solid green'
             : formTitle.invalid && isTriggered
-            ? '1px solid red'
+            ? '2px solid red'
             : ''
       }"
   /></label>
@@ -27,9 +27,9 @@
       [ngStyle]="{
         border:
           formTitle.valid && formDescription.valid && isTriggered
-            ? '1px solid green'
+            ? '2px solid green'
             : (formTitle.invalid || formDescription.invalid) && isTriggered
-            ? '1px solid red'
+            ? '2px solid red'
             : ''
       }"
     />
@@ -40,7 +40,13 @@
     <input type="date" name="deadlineDate" formControlName="deadlineDate" [min]="todaysDate" />
   </label>
 
-  <button type="button" (click)="isEdit ? submitEditTodo() : addTodo()">submit</button>
+  <button
+    type="button"
+    [disabled]="isTriggered && todoForm.invalid"
+    (click)="isEdit ? submitEditTodo() : addTodo()"
+  >
+    submit
+  </button>
 
   <ng-container *ngIf="formTitle.invalid && isTriggered">
     <div>
