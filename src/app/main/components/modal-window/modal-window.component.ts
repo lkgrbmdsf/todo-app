@@ -56,6 +56,8 @@ export class ModalWindowComponent {
     };
   }
 
+  // TODO split po stroke
+
   addTodo(): void {
     this.isTriggered = true;
     if (this.isTriggered) {
@@ -68,6 +70,8 @@ export class ModalWindowComponent {
     }
   }
 
+  // TODO: edem na mein
+
   submitEditTodo(): void {
     this.isEdit = false;
     this.makeChange.emit(this.isEdit);
@@ -78,6 +82,23 @@ export class ModalWindowComponent {
       this.currentTodo.deadlineDate = this.formDeadlineDate?.value;
     }
   }
+
+  titleErrorHandler() {
+    return this.formTitle.errors?.required
+      ? 'should not be empty'
+      : this.formTitle.errors?.forbidden
+      ? 'should be 4 or less words'
+      : `${'unknown error' + console.log(this.formTitle.errors)}`;
+  }
+
+  descErrorHandler() {
+    return this.formDescription.errors?.required
+      ? 'should not be empty'
+      : this.formDescription.errors?.maxlength
+      ? 'should me less then 256 chars'
+      : `${'unknown error' + console.log(this.formDescription.errors)}`;
+  }
+  // TODO: vy toz podtyagivaites rebyata
 }
 
-// TODO: make directive by click
+// TODO: what's with edit

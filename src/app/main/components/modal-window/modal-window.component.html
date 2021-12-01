@@ -1,4 +1,10 @@
 <form class="modal" [formGroup]="todoForm">
+  <ng-container *ngIf="formTitle.invalid && isTriggered">
+    <div>
+      {{ titleErrorHandler() }}
+    </div>
+  </ng-container>
+
   <label for="title">
     {{ isEdit ? currentTodo?.title : 'Todo title: ' }}
     <input
@@ -16,6 +22,14 @@
             : ''
       }"
   /></label>
+
+  <!-- TODO: переделать на [style.borders] -->
+
+  <ng-container *ngIf="(formTitle.invalid || formDescription.invalid) && isTriggered">
+    <div>
+      {{ descErrorHandler() }}
+    </div>
+  </ng-container>
 
   <label for="description"
     >{{ isEdit ? currentTodo?.description : ' Todo description: ' }}
@@ -35,6 +49,8 @@
     />
   </label>
 
+  <!-- TODO: переделать на [style.borders] -->
+
   <label for="deadlineDate"
     >Todo deadline:
     <input type="date" name="deadlineDate" formControlName="deadlineDate" [min]="todaysDate" />
@@ -48,11 +64,4 @@
     submit
   </button>
 
-  <ng-container *ngIf="formTitle.invalid && isTriggered">
-    <div>
-      {{ formTitle.errors?.['required'] ? "надо поле заполнить" : formTitle.errors?.['forbidden'] ? 'меньше слов надо' : formTitle.errors}}
-    </div>
-  </ng-container>
-
-  <!-- TODO: make error type for each input -->
 </form>
