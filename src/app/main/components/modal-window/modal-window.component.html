@@ -1,4 +1,4 @@
-<div class="modal" [formGroup]="todoForm">
+<div class="modal" *ngIf="isCreated || isEdit" [formGroup]="todoForm">
   <ng-container *ngIf="formTitle.invalid && isTriggered">
     <div>
       {{ titleErrorHandler }}

@@ -3,23 +3,21 @@
   <button type="button" (click)="createTodo()">create Todo</button>
 </div>
 
-<div class="test" *ngIf="isEdit || isCreated">
-  <app-modal-window
-    [isCreated]="isCreated"
-    [isEdit]="isEdit"
-    [isTriggered]="isTriggered"
-    [todoForm]="todoForm"
-    [todos]="todos"
-    [formTitle]="formTitle"
-    [formDescription]="formDescription"
-    [formDeadlineDate]="formDeadlineDate"
-    [todaysDate]="todaysDate"
-    [titleErrorHandler]="titleErrorHandler()"
-    [descErrorHandler]="descErrorHandler()"
-    [submitEditTodo]="submitEditTodo"
-    [addTodo]="addTodo"
-  ></app-modal-window>
-</div>
+<app-modal-window
+  [isEdit]="isEdit"
+  [isCreated]="isCreated"
+  [isTriggered]="isTriggered"
+  [todoForm]="todoForm"
+  [todos]="todos"
+  [formTitle]="formTitle"
+  [formDescription]="formDescription"
+  [formDeadlineDate]="formDeadlineDate"
+  [todaysDate]="todaysDate"
+  [titleErrorHandler]="titleErrorHandler()"
+  [descErrorHandler]="descErrorHandler()"
+  [submitEditTodo]="submitEditTodo"
+  [addTodo]="addTodo"
+></app-modal-window>
 
 <!-- TODO: naming  -->
 

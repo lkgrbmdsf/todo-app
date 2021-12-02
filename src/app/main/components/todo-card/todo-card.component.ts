@@ -9,15 +9,17 @@ import { Todo } from 'src/app/shared/interfaces/todos-interface';
   styleUrls: ['./todo-card.component.scss'],
 })
 export class TodoCardComponent {
+  @Input() todo!: Todo;
+
+  @Input() isEdit: boolean = false;
+
+  // TODO: isedit
+
   @Output() makeChange = new EventEmitter<boolean>();
 
   @Output() todoEmit = new EventEmitter<Todo>();
 
-  @Input() isEdit: boolean = false;
-
   currentTodo?: Todo;
-
-  @Input() todo!: Todo;
 
   todos: Todo[] = DATA;
 
@@ -27,7 +29,7 @@ export class TodoCardComponent {
 
   showDesc(todo: Todo): void {
     this.currentTodo = todo;
-    this.currentTodo.isShown = !this.currentTodo.isShown;
+    // todo.isShown = !this.currentTodo.isShown;
   }
 
   deleteTodo(todo: Todo): Todo[] {
@@ -39,6 +41,8 @@ export class TodoCardComponent {
     return this.todos;
   }
 
+  // TODO: transfere to main delete
+
   editTodo(todo: Todo): void {
     this.isEdit = !this.isEdit;
     this.currentTodo = todo;
@@ -46,9 +50,13 @@ export class TodoCardComponent {
     this.todoEmit.emit(this.currentTodo);
   }
 
-  doneTodo(todo: Todo): Todo[] {
+  // TODO: delete current todo
+
+  doneTodo(todo: Todo): void {
     this.currentTodo = todo;
-    this.currentTodo.isDone = true;
-    return this.todos;
+    // this.currentTodo.isDone = true;
+    // return this.todos;
   }
+
+  // TODO: redo
 }
