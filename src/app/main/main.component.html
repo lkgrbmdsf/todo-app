@@ -1,9 +1,9 @@
 <div class="main">
   <h1>Todo app</h1>
-  <button type="button" (click)="createTodo()">create Todo</button>
+  <button type="button" (click)="openModal()">create Todo</button>
 </div>
 
-<app-modal-window
+<app-modal-menu
   [isEdit]="isEdit"
   [isCreated]="isCreated"
   [isTriggered]="isTriggered"
@@ -17,9 +17,7 @@
   [descErrorHandler]="descErrorHandler()"
   [submitEditTodo]="submitEditTodo"
   [addTodo]="addTodo"
-></app-modal-window>
-
-<!-- TODO: naming  -->
+></app-modal-menu>
 
 <div *ngIf="todos.length; else elseBlock" class="list">
   <div class="sort-wrapper">

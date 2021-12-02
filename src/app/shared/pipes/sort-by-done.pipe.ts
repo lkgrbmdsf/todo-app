@@ -6,7 +6,9 @@ import { Todo } from '../interfaces/todos-interface';
   pure: false,
 })
 export class FilterByDonePipe implements PipeTransform {
-  transform(todos: Todo[], isSorted: boolean): Todo[] {
-    return isSorted ? todos.filter((todo) => todo.isDone) : todos;
+  transform(todos: Todo[]): Todo[] {
+    return todos;
   }
 }
+
+// TODO: po imeni

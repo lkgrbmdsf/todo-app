@@ -3,5 +3,3 @@ export interface Todo {
   description: string;
   deadlineDate: Date;
 }
-
-// TODO: delete and transfer to card

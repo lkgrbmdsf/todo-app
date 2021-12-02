@@ -4,11 +4,11 @@ import { DATA } from 'src/app/shared/data/todo-data';
 import { Todo } from 'src/app/shared/interfaces/todos-interface';
 
 @Component({
-  selector: 'app-modal-window',
-  templateUrl: './modal-window.component.html',
-  styleUrls: ['./modal-window.component.scss'],
+  selector: 'app-modal-menu',
+  templateUrl: './modal-menu.component.html',
+  styleUrls: ['./modal-menu.component.scss'],
 })
-export class ModalWindowComponent {
+export class ModalMenuComponent {
   @Input() isEdit?: boolean;
 
   @Input() isCreated?: boolean;

@@ -53,11 +53,9 @@ export class MainComponent {
     };
   }
 
-  createTodo(): void {
+  openModal(): void {
     this.isCreated = !this.isCreated;
   }
-
-  // TODO: naming
 
   refresh(edit: boolean) {
     this.isEdit = edit;
