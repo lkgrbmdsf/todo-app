@@ -25,10 +25,7 @@ export class ModalWindowComponent {
   todaysDate: string = TODAYSDATE;
 
   todoForm: FormGroup = this.fb.group({
-    title: [
-      '',
-      [Validators.required, this.forbiddenNameValidator(/^(?:\s*\S+(?:\s+\S+){0,3})?\s*$/)],
-    ],
+    title: ['', [Validators.required, this.forbiddenNameValidator()]],
     description: ['', [Validators.required, Validators.maxLength(256)]],
     isDone: [false],
     isShown: [false],
@@ -49,14 +46,14 @@ export class ModalWindowComponent {
     return this.todoForm.get('deadlineDate') as FormGroup;
   }
 
-  forbiddenNameValidator(nameRe: RegExp) {
+  forbiddenNameValidator() {
     return (control: FormGroup): ValidationErrors | null => {
-      const accepted = nameRe.test(control.value);
-      return accepted ? null : { forbidden: { value: control.value } };
+      const accepted = control.value.split(' ').filter((str: string) => str.length > 0);
+      return accepted.length > 0 && accepted.length <= 4
+        ? null
+        : { forbidden: { value: control.value } };
     };
   }
-
-  // TODO split po stroke
 
   addTodo(): void {
     this.isTriggered = true;
