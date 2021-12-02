@@ -1,12 +1,12 @@
-<form class="modal" [formGroup]="todoForm">
+<div class="modal" [formGroup]="todoForm">
   <ng-container *ngIf="formTitle.invalid && isTriggered">
     <div>
-      {{ titleErrorHandler() }}
+      {{ titleErrorHandler }}
     </div>
   </ng-container>
 
   <label for="title">
-    {{ isEdit ? currentTodo?.title : 'Todo title: ' }}
+    {{ isEdit ? todo?.title : 'Todo title: ' }}
     <input
       class="test"
       type="text"
@@ -23,16 +23,14 @@
       }"
   /></label>
 
-  <!-- TODO: переделать на [style.borders] -->
-
-  <ng-container *ngIf="(formTitle.invalid || formDescription.invalid) && isTriggered">
+  <ng-container *ngIf="formDescription.invalid && isTriggered">
     <div>
-      {{ descErrorHandler() }}
+      {{ descErrorHandler }}
     </div>
   </ng-container>
 
   <label for="description"
-    >{{ isEdit ? currentTodo?.description : ' Todo description: ' }}
+    >{{ isEdit ? todo?.description : ' Todo description: ' }}
     <input
       type="text"
       name="description"
@@ -40,16 +38,14 @@
       autocomplete="off"
       [ngStyle]="{
         border:
-          formTitle.valid && formDescription.valid && isTriggered
+          formDescription.valid && isTriggered
             ? '2px solid green'
-            : (formTitle.invalid || formDescription.invalid) && isTriggered
+            : formDescription.invalid && isTriggered
             ? '2px solid red'
             : ''
       }"
     />
   </label>
-
-  <!-- TODO: переделать на [style.borders] -->
 
   <label for="deadlineDate"
     >Todo deadline:
@@ -59,9 +55,8 @@
   <button
     type="button"
     [disabled]="isTriggered && todoForm.invalid"
-    (click)="isEdit ? submitEditTodo() : addTodo()"
+    (click)="isEdit ? submitEditTodo(todo!) : addTodo()"
   >
     submit
   </button>
-
-</form>
+</div>

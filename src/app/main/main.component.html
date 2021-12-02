@@ -3,15 +3,25 @@
   <button type="button" (click)="createTodo()">create Todo</button>
 </div>
 
-<ng-container *ngIf="isEdit || isCreated">
+<div class="test" *ngIf="isEdit || isCreated">
   <app-modal-window
-    [isEdit]="isEdit"
     [isCreated]="isCreated"
-    [currentTodo]="currentTodo"
-    (makeChange)="refresh($event)"
-    (makeChange)="refreshCreated($event)"
-  ></app-modal-window
-></ng-container>
+    [isEdit]="isEdit"
+    [isTriggered]="isTriggered"
+    [todoForm]="todoForm"
+    [todos]="todos"
+    [formTitle]="formTitle"
+    [formDescription]="formDescription"
+    [formDeadlineDate]="formDeadlineDate"
+    [todaysDate]="todaysDate"
+    [titleErrorHandler]="titleErrorHandler()"
+    [descErrorHandler]="descErrorHandler()"
+    [submitEditTodo]="submitEditTodo"
+    [addTodo]="addTodo"
+  ></app-modal-window>
+</div>
+
+<!-- TODO: naming  -->
 
 <div *ngIf="todos.length; else elseBlock" class="list">
   <div class="sort-wrapper">
@@ -20,13 +30,15 @@
     </button>
   </div>
 
+  <!-- TODO: make filter by input word -->
+
   <div class="todo-wrapper">
     <app-todo-card
       [isEdit]="isEdit"
       [todo]="todo"
       (makeChange)="refresh($event)"
       (todoEmit)="currentTodoEmit($event)"
-      *ngFor="let todo of todos | filterByDone: isSorted"
+      *ngFor="let todo of todos | filterByDone"
     >
     </app-todo-card>
   </div>

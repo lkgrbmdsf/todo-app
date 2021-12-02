@@ -1,6 +1,5 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
-import { TODAYSDATE } from 'src/app/shared/const/const-values';
+import { Component, Input } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { DATA } from 'src/app/shared/data/todo-data';
 import { Todo } from 'src/app/shared/interfaces/todos-interface';
 
@@ -10,92 +9,31 @@ import { Todo } from 'src/app/shared/interfaces/todos-interface';
   styleUrls: ['./modal-window.component.scss'],
 })
 export class ModalWindowComponent {
-  @Input() isEdit: boolean = false;
+  @Input() isEdit?: boolean;
 
-  @Input() isCreated: boolean = false;
+  @Input() isCreated?: boolean;
 
-  @Input() currentTodo?: Todo;
+  @Input() isTriggered?: boolean;
 
-  @Output() makeChange = new EventEmitter<boolean>();
+  @Input() addTodo!: () => void;
 
-  isTriggered: boolean = false;
+  @Input() submitEditTodo!: (todo: Todo) => void;
 
-  todos: Todo[] = DATA;
+  @Input() todoForm!: FormGroup;
 
-  todaysDate: string = TODAYSDATE;
+  @Input() formTitle!: FormGroup;
 
-  todoForm: FormGroup = this.fb.group({
-    title: ['', [Validators.required, this.forbiddenNameValidator()]],
-    description: ['', [Validators.required, Validators.maxLength(256)]],
-    isDone: [false],
-    isShown: [false],
-    deadlineDate: [TODAYSDATE, Validators.required],
-  });
+  @Input() formDescription!: FormGroup;
 
-  constructor(private fb: FormBuilder) {}
+  @Input() formDeadlineDate!: FormGroup;
 
-  get formTitle(): FormGroup {
-    return this.todoForm.get('title') as FormGroup;
-  }
+  @Input() todaysDate?: string;
 
-  get formDescription(): FormGroup {
-    return this.todoForm.get('description') as FormGroup;
-  }
+  @Input() titleErrorHandler?: string;
 
-  get formDeadlineDate(): FormGroup {
-    return this.todoForm.get('deadlineDate') as FormGroup;
-  }
+  @Input() descErrorHandler?: string;
 
-  forbiddenNameValidator() {
-    return (control: FormGroup): ValidationErrors | null => {
-      const accepted = control.value.split(' ').filter((str: string) => str.length > 0);
-      return accepted.length > 0 && accepted.length <= 4
-        ? null
-        : { forbidden: { value: control.value } };
-    };
-  }
+  @Input() todo?: Todo;
 
-  addTodo(): void {
-    this.isTriggered = true;
-    if (this.isTriggered) {
-      if (this.todoForm.valid) {
-        this.todos.push(this.todoForm.value);
-        this.isCreated = false;
-        this.makeChange.emit(this.isCreated);
-        this.isTriggered = false;
-      }
-    }
-  }
-
-  // TODO: edem na mein
-
-  submitEditTodo(): void {
-    this.isEdit = false;
-    this.makeChange.emit(this.isEdit);
-
-    if (this.currentTodo) {
-      this.currentTodo.title = this.formTitle?.value;
-      this.currentTodo.description = this.formDescription?.value;
-      this.currentTodo.deadlineDate = this.formDeadlineDate?.value;
-    }
-  }
-
-  titleErrorHandler() {
-    return this.formTitle.errors?.required
-      ? 'should not be empty'
-      : this.formTitle.errors?.forbidden
-      ? 'should be 4 or less words'
-      : `${'unknown error: ' + this.formTitle.errors}`;
-  }
-
-  descErrorHandler() {
-    return this.formDescription.errors?.required
-      ? 'should not be empty'
-      : this.formDescription.errors?.maxlength
-      ? 'should me less then 256 chars'
-      : `${'unknown error: ' + this.formDescription.errors}`;
-  }
-  // TODO: vy toz podtyagivaites rebyata
+  @Input() todos: Todo[] = DATA;
 }
-
-// TODO: what's with edit
