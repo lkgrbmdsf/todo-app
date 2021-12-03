@@ -9,7 +9,6 @@
   border-radius: 5px;
   border: 2px solid ghostwhite;
   transition: background-color 0.5s;
-  cursor: pointer;
 
   &:hover {
     transition: background-color 0.5s;
@@ -27,6 +26,10 @@
   button {
     margin: 5px;
   }
+}
+
+h2 {
+  cursor: pointer;
 }
 
 .buttons {

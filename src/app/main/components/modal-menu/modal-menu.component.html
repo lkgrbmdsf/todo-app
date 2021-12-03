@@ -1,18 +1,19 @@
-<div class="modal" *ngIf="isCreated || isEdit" [formGroup]="todoForm">
+<div class="modal" [formGroup]="todoForm">
   <ng-container *ngIf="formTitle.invalid && isTriggered">
     <div>
-      {{ titleErrorHandler }}
+      {{ titleErrorHandler() }}
     </div>
   </ng-container>
 
   <label for="title">
-    {{ isEdit ? todo?.title : 'Todo title: ' }}
+    Todo title:
     <input
       class="test"
       type="text"
       name="title"
       formControlName="title"
       autocomplete="off"
+      placeholder="{{ isEdit ? todo?.title : '' }}"
       [ngStyle]="{
         border:
           formTitle.valid && isTriggered
@@ -25,17 +26,18 @@
 
   <ng-container *ngIf="formDescription.invalid && isTriggered">
     <div>
-      {{ descErrorHandler }}
+      {{ descErrorHandler() }}
     </div>
   </ng-container>
 
   <label for="description"
-    >{{ isEdit ? todo?.description : ' Todo description: ' }}
+    >Todo description:
     <input
       type="text"
       name="description"
       formControlName="description"
       autocomplete="off"
+      placeholder="{{ isEdit ? todo?.description : '' }}"
       [ngStyle]="{
         border:
           formDescription.valid && isTriggered
@@ -55,7 +57,7 @@
   <button
     type="button"
     [disabled]="isTriggered && todoForm.invalid"
-    (click)="isEdit ? submitEditTodo(todo!) : addTodo()"
+    (click)="isEdit ? editTodo() : addNewTodo()"
   >
     submit
   </button>

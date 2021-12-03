@@ -1,6 +1,6 @@
-import { Component, Input } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { DATA } from 'src/app/shared/data/todo-data';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { TODAYSDATE } from 'src/app/shared/const/const-values';
 import { Todo } from 'src/app/shared/interfaces/todos-interface';
 
 @Component({
@@ -9,31 +9,78 @@ import { Todo } from 'src/app/shared/interfaces/todos-interface';
   styleUrls: ['./modal-menu.component.scss'],
 })
 export class ModalMenuComponent {
-  @Input() isEdit?: boolean;
-
-  @Input() isCreated?: boolean;
-
-  @Input() isTriggered?: boolean;
-
-  @Input() addTodo!: () => void;
-
-  @Input() submitEditTodo!: (todo: Todo) => void;
-
-  @Input() todoForm!: FormGroup;
-
-  @Input() formTitle!: FormGroup;
-
-  @Input() formDescription!: FormGroup;
-
-  @Input() formDeadlineDate!: FormGroup;
-
-  @Input() todaysDate?: string;
-
-  @Input() titleErrorHandler?: string;
-
-  @Input() descErrorHandler?: string;
-
   @Input() todo?: Todo;
 
-  @Input() todos: Todo[] = DATA;
+  @Input() isEdit?: boolean;
+
+  @Output() addTodo = new EventEmitter();
+
+  @Output() edit = new EventEmitter();
+
+  todaysDate: string = TODAYSDATE;
+
+  isTriggered: boolean = false;
+
+  constructor(private fb: FormBuilder) {}
+
+  todoForm: FormGroup = this.fb.group({
+    title: ['', [Validators.required, this.forbiddenNameValidator()]],
+    description: ['', [Validators.required, Validators.maxLength(256)]],
+    deadlineDate: [TODAYSDATE, Validators.required],
+  });
+
+  get formTitle(): FormGroup {
+    return this.todoForm.get('title') as FormGroup;
+  }
+
+  get formDescription(): FormGroup {
+    return this.todoForm.get('description') as FormGroup;
+  }
+
+  get formDeadlineDate(): FormGroup {
+    return this.todoForm.get('deadlineDate') as FormGroup;
+  }
+
+  forbiddenNameValidator() {
+    return (control: FormGroup): ValidationErrors | null => {
+      const accepted = control.value.split(' ').filter((str: string) => str.length > 0);
+      return accepted.length > 0 && accepted.length <= 4
+        ? null
+        : { forbidden: { value: control.value } };
+    };
+  }
+
+  titleErrorHandler(): string {
+    return this.formTitle.errors?.required
+      ? 'should not be empty'
+      : this.formTitle.errors?.forbidden
+      ? 'should be 4 or less words'
+      : `${'unknown error: ' + this.formTitle.errors}`;
+  }
+
+  descErrorHandler(): string {
+    return this.formDescription.errors?.required
+      ? 'should not be empty'
+      : this.formDescription.errors?.maxlength
+      ? 'should me less then 256 chars'
+      : `${'unknown error: ' + this.formDescription.errors}`;
+  }
+
+  addNewTodo() {
+    this.isTriggered = true;
+    if (this.isTriggered) {
+      if (this.todoForm.valid) {
+        this.addTodo.emit(this.todoForm);
+      }
+    }
+  }
+
+  editTodo() {
+    this.isTriggered = true;
+    if (this.isTriggered) {
+      if (this.todoForm.valid) {
+        this.edit.emit(this.todoForm);
+      }
+    }
+  }
 }

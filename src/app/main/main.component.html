@@ -5,36 +5,23 @@
 
 <app-modal-menu
   [isEdit]="isEdit"
-  [isCreated]="isCreated"
-  [isTriggered]="isTriggered"
-  [todoForm]="todoForm"
-  [todos]="todos"
-  [formTitle]="formTitle"
-  [formDescription]="formDescription"
-  [formDeadlineDate]="formDeadlineDate"
-  [todaysDate]="todaysDate"
-  [titleErrorHandler]="titleErrorHandler()"
-  [descErrorHandler]="descErrorHandler()"
-  [submitEditTodo]="submitEditTodo"
-  [addTodo]="addTodo"
+  [todo]="todo"
+  *ngIf="isCreated || isEdit"
+  (addTodo)="addTodo($event)"
+  (edit)="edit($event)"
 ></app-modal-menu>
 
 <div *ngIf="todos.length; else elseBlock" class="list">
-  <div class="sort-wrapper">
-    <button type="button" (click)="sort()">
-      {{ isSorted ? 'back to all' : 'show only done todos' }}
-    </button>
-  </div>
+  <div class="sort-wrapper"></div>
 
   <!-- TODO: make filter by input word -->
 
   <div class="todo-wrapper">
     <app-todo-card
-      [isEdit]="isEdit"
-      [todo]="todo"
-      (makeChange)="refresh($event)"
-      (todoEmit)="currentTodoEmit($event)"
       *ngFor="let todo of todos | filterByDone"
+      [todo]="todo"
+      (deleteTodo)="deleteTodo($event)"
+      (editTodo)="submitEditTodo($event)"
     >
     </app-todo-card>
   </div>

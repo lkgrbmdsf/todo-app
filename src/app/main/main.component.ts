@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
-import { TODAYSDATE } from '../shared/const/const-values';
+import { FormGroup } from '@angular/forms';
 import { DATA } from '../shared/data/todo-data';
 import { Todo } from '../shared/interfaces/todos-interface';
 
@@ -16,99 +15,37 @@ export class MainComponent {
 
   isSorted: boolean = false;
 
-  isTriggered: boolean = false;
-
-  todaysDate: string = TODAYSDATE;
-
-  currentTodo?: Todo;
+  todo!: Todo;
 
   todos: Todo[] = DATA;
 
-  todoForm: FormGroup = this.fb.group({
-    title: ['', [Validators.required, this.forbiddenNameValidator()]],
-    description: ['', [Validators.required, Validators.maxLength(256)]],
-    deadlineDate: [TODAYSDATE, Validators.required],
-  });
-
-  constructor(private fb: FormBuilder) {}
-
-  get formTitle(): FormGroup {
-    return this.todoForm.get('title') as FormGroup;
-  }
-
-  get formDescription(): FormGroup {
-    return this.todoForm.get('description') as FormGroup;
-  }
-
-  get formDeadlineDate(): FormGroup {
-    return this.todoForm.get('deadlineDate') as FormGroup;
-  }
-
-  forbiddenNameValidator() {
-    return (control: FormGroup): ValidationErrors | null => {
-      const accepted = control.value.split(' ').filter((str: string) => str.length > 0);
-      return accepted.length > 0 && accepted.length <= 4
-        ? null
-        : { forbidden: { value: control.value } };
-    };
-  }
-
-  openModal(): void {
+  openModal() {
     this.isCreated = !this.isCreated;
   }
 
-  refresh(edit: boolean) {
-    this.isEdit = edit;
+  addTodo(todo: FormGroup) {
+    this.todos.push(todo.value);
+    this.isCreated = !this.isCreated;
   }
 
-  refreshCreated(isCreated: boolean) {
-    this.isCreated = isCreated;
+  submitEditTodo(todo: Todo) {
+    this.todo = todo;
+    this.isEdit = true;
   }
 
-  currentTodoEmit(todo: Todo) {
-    this.currentTodo = todo;
+  edit(todo: FormGroup) {
+    this.todo.title = todo.value.title;
+    this.todo.description = todo.value.description;
+    this.todo.deadlineDate = todo.value.deadlineDate;
+
+    this.isEdit = false;
   }
 
-  // TODO curent todo nado ubrat
-
-  sort() {
-    this.isSorted = !this.isSorted;
-  }
-
-  addTodo(): void {
-    this.isTriggered = true;
-    if (this.isTriggered) {
-      if (this.todoForm.valid) {
-        this.todos.push(this.todoForm.value);
-        this.isCreated = false;
-        this.isTriggered = false;
+  deleteTodo(todo: Todo) {
+    for (let i = 0; i < this.todos.length; i++) {
+      if (this.todos[i] === todo) {
+        this.todos.splice(i, 1);
       }
     }
-  }
-
-  submitEditTodo(todo: Todo): void {
-    this.isEdit = false;
-
-    if (this.currentTodo) {
-      todo.title = this.formTitle?.value;
-      todo.description = this.formDescription?.value;
-      todo.deadlineDate = this.formDeadlineDate?.value;
-    }
-  }
-
-  titleErrorHandler(): string {
-    return this.formTitle.errors?.required
-      ? 'should not be empty'
-      : this.formTitle.errors?.forbidden
-      ? 'should be 4 or less words'
-      : `${'unknown error: ' + this.formTitle.errors}`;
-  }
-
-  descErrorHandler(): string {
-    return this.formDescription.errors?.required
-      ? 'should not be empty'
-      : this.formDescription.errors?.maxlength
-      ? 'should me less then 256 chars'
-      : `${'unknown error: ' + this.formDescription.errors}`;
   }
 }

@@ -1,6 +1,4 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { TODAYSDATE } from 'src/app/shared/const/const-values';
-import { DATA } from 'src/app/shared/data/todo-data';
 import { Todo } from 'src/app/shared/interfaces/todos-interface';
 
 @Component({
@@ -9,54 +7,29 @@ import { Todo } from 'src/app/shared/interfaces/todos-interface';
   styleUrls: ['./todo-card.component.scss'],
 })
 export class TodoCardComponent {
-  @Input() todo!: Todo;
+  @Input() todo?: Todo;
 
-  @Input() isEdit: boolean = false;
+  @Output() deleteTodo = new EventEmitter();
 
-  // TODO: isedit
+  @Output() editTodo = new EventEmitter();
 
-  @Output() makeChange = new EventEmitter<boolean>();
+  isDone: boolean = false;
 
-  @Output() todoEmit = new EventEmitter<Todo>();
+  isShown: boolean = false;
 
-  currentTodo?: Todo;
-
-  todos: Todo[] = DATA;
-
-  todaysDate: string = TODAYSDATE;
-
-  isSorted: boolean = false;
-
-  showDesc(todo: Todo): void {
-    this.currentTodo = todo;
-    // todo.isShown = !this.currentTodo.isShown;
+  deleteCurrent() {
+    this.deleteTodo.emit(this.todo);
   }
 
-  deleteTodo(todo: Todo): Todo[] {
-    for (let i = 0; i < this.todos.length; i++) {
-      if (this.todos[i].title === todo.title) {
-        this.todos.splice(i, 1);
-      }
-    }
-    return this.todos;
+  edit() {
+    this.editTodo.emit(this.todo);
   }
 
-  // TODO: transfere to main delete
-
-  editTodo(todo: Todo): void {
-    this.isEdit = !this.isEdit;
-    this.currentTodo = todo;
-    this.makeChange.emit(this.isEdit);
-    this.todoEmit.emit(this.currentTodo);
+  showDesc(): void {
+    this.isShown = !this.isShown;
   }
 
-  // TODO: delete current todo
-
-  doneTodo(todo: Todo): void {
-    this.currentTodo = todo;
-    // this.currentTodo.isDone = true;
-    // return this.todos;
+  doneTodo(): void {
+    this.isDone = !this.isDone;
   }
-
-  // TODO: redo
 }
