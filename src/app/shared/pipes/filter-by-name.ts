@@ -7,6 +7,9 @@ import { Todo } from '../interfaces/todos-interface';
 })
 export class FilterByNamePipe implements PipeTransform {
   transform(todos: Todo[], value: string): Todo[] {
-    return todos.filter((todo) => todo.title.toLowerCase().includes(value.toLowerCase()));
+    return todos.filter((todo) =>
+      value.length >= 3 ? todo.title.toLowerCase().includes(value.toLowerCase()) : todo,
+    );
   }
 }
+//TODO: shared module pipe into the module

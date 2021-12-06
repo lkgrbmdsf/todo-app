@@ -13,7 +13,7 @@
       name="title"
       formControlName="title"
       autocomplete="off"
-      placeholder="{{ isEdit ? todo?.title : '' }}"
+      placeholder="{{ todo ? todo.title : '' }}"
       [ngStyle]="{
         border:
           formTitle.valid && isTriggered
@@ -23,6 +23,8 @@
             : ''
       }"
   /></label>
+
+  <!-- TODO: class.styles -->
 
   <ng-container *ngIf="formDescription.invalid && isTriggered">
     <div>
@@ -37,7 +39,7 @@
       name="description"
       formControlName="description"
       autocomplete="off"
-      placeholder="{{ isEdit ? todo?.description : '' }}"
+      placeholder="{{ todo ? todo.description : '' }}"
       [ngStyle]="{
         border:
           formDescription.valid && isTriggered
@@ -57,7 +59,7 @@
   <button
     type="button"
     [disabled]="isTriggered && todoForm.invalid"
-    (click)="isEdit ? editTodo() : addNewTodo()"
+    (click)="todo ? editTodo() : addNewTodo()"
   >
     submit
   </button>

@@ -11,8 +11,6 @@ import { Todo } from 'src/app/shared/interfaces/todos-interface';
 export class ModalDialogComponent {
   @Input() todo?: Todo;
 
-  @Input() isEdit?: boolean;
-
   @Output() addTodo = new EventEmitter();
 
   @Output() edit = new EventEmitter();
@@ -41,7 +39,7 @@ export class ModalDialogComponent {
     return this.todoForm.get('deadlineDate') as FormGroup;
   }
 
-  forbiddenNameValidator() {
+  forbiddenNameValidator(): null | Object {
     return (control: FormGroup): ValidationErrors | null => {
       const accepted = control.value.split(' ').filter((str: string) => str.length > 0);
       return accepted.length > 0 && accepted.length <= 4
@@ -65,6 +63,9 @@ export class ModalDialogComponent {
       ? 'should me less then 256 chars'
       : `${'unknown error: ' + this.formDescription.errors}`;
   }
+
+  // TODO: make var
+  // TODO: {error: custom string}
 
   addNewTodo() {
     this.isTriggered = true;
