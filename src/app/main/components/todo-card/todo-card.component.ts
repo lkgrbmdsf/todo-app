@@ -13,6 +13,8 @@ export class TodoCardComponent {
 
   @Output() editTodo = new EventEmitter();
 
+  @Output() doneTodo = new EventEmitter();
+
   isDone: boolean = false;
 
   isShown: boolean = false;
@@ -29,7 +31,7 @@ export class TodoCardComponent {
     this.isShown = !this.isShown;
   }
 
-  doneTodo(): void {
-    this.isDone = !this.isDone;
+  makeDone(): void {
+    this.doneTodo.emit(this.todo);
   }
 }

@@ -43,6 +43,10 @@ export class MainComponent {
     this.isEdit = false;
   }
 
+  doneTodo(todo: Todo) {
+    todo.isDone = true;
+  }
+
   deleteTodo(todo: Todo) {
     for (let i = 0; i < this.todos.length; i++) {
       if (this.todos[i] === todo) {
@@ -50,4 +54,5 @@ export class MainComponent {
       }
     }
   }
+  //TODO: not splice but filter
 }

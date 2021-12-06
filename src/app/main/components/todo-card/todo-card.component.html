@@ -1,13 +1,13 @@
-<li class="todos" [ngClass]="isDone ? 'done-todos' : ''">
+<li class="todos" [class.isDone]="todo?.isDone">
   <h2 class="title" (click)="showDesc()">{{ todo?.title }}</h2>
-  <p class="description">
-    {{ isShown ? todo?.description : '' }}
+  <p *ngIf="isShown" class="description">
+    {{ todo?.description }}
   </p>
   <p>{{ todo?.deadlineDate | date: 'dd/MM/yyyy' }}</p>
 
   <div class="buttons">
     <button type="button" (click)="deleteCurrent()">delete</button>
-    <button *ngIf="!isDone" type="button" (click)="doneTodo()">done</button>
-    <button *ngIf="!isDone" type="button" (click)="edit()">edit</button>
+    <button *ngIf="!todo?.isDone" type="button" (click)="makeDone()">done</button>
+    <button *ngIf="!todo?.isDone" type="button" (click)="edit()">edit</button>
   </div>
 </li>

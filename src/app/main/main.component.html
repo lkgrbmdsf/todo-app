@@ -4,7 +4,6 @@
 </div>
 
 <app-modal-dialog
-  [isEdit]="isEdit"
   [todo]="todo"
   *ngIf="isCreated || isEdit"
   (addTodo)="addTodo($event)"
@@ -13,7 +12,13 @@
 
 <div *ngIf="todos.length; else elseBlock" class="list">
   <div class="sort-wrapper">
-    <input [formControl]="search" type="text" name="search" placeholder="start to type title" />
+    <input
+      [formControl]="search"
+      type="text"
+      name="search"
+      placeholder="start to type a title"
+      autocomplete="off"
+    />
   </div>
 
   <div class="todo-wrapper">
@@ -22,6 +27,7 @@
       [todo]="todo"
       (deleteTodo)="deleteTodo($event)"
       (editTodo)="submitEditTodo($event)"
+      (doneTodo)="doneTodo($event)"
     >
     </app-todo-card>
   </div>
