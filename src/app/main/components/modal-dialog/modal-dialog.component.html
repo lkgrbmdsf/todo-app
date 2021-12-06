@@ -14,17 +14,9 @@
       formControlName="title"
       autocomplete="off"
       placeholder="{{ todo ? todo.title : '' }}"
-      [ngStyle]="{
-        border:
-          formTitle.valid && isTriggered
-            ? '2px solid green'
-            : formTitle.invalid && isTriggered
-            ? '2px solid red'
-            : ''
-      }"
+      [class.permitted]="formTitle.valid && isTriggered"
+      [class.denied]="formTitle.invalid && isTriggered"
   /></label>
-
-  <!-- TODO: class.styles -->
 
   <ng-container *ngIf="formDescription.invalid && isTriggered">
     <div>
@@ -40,14 +32,8 @@
       formControlName="description"
       autocomplete="off"
       placeholder="{{ todo ? todo.description : '' }}"
-      [ngStyle]="{
-        border:
-          formDescription.valid && isTriggered
-            ? '2px solid green'
-            : formDescription.invalid && isTriggered
-            ? '2px solid red'
-            : ''
-      }"
+      [class.permitted]="formDescription.valid && isTriggered"
+      [class.denied]="formDescription.invalid && isTriggered"
     />
   </label>
 

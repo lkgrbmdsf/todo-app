@@ -36,4 +36,14 @@
   input:focus {
     outline: none;
   }
+
+  .permitted {
+    border: 2px solid green;
+    border-radius: 4px;
+  }
+
+  .denied {
+    border: 2px solid red;
+    border-radius: 4px;
+  }
 }
