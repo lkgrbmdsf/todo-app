@@ -2,11 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TodoCardComponent } from './todo-card/todo-card.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { ModalMenuComponent } from './modal-menu/modal-menu.component';
+import { ModalDialogComponent } from './modal-dialog/modal-menu.component';
 
 @NgModule({
-  declarations: [TodoCardComponent, ModalMenuComponent],
+  declarations: [TodoCardComponent, ModalDialogComponent],
   imports: [CommonModule, ReactiveFormsModule],
-  exports: [TodoCardComponent, ModalMenuComponent],
+  exports: [TodoCardComponent, ModalDialogComponent],
 })
 export class ComponentsModule {}

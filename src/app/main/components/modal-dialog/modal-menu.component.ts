@@ -4,11 +4,11 @@ import { TODAYSDATE } from 'src/app/shared/const/const-values';
 import { Todo } from 'src/app/shared/interfaces/todos-interface';
 
 @Component({
-  selector: 'app-modal-menu',
-  templateUrl: './modal-menu.component.html',
-  styleUrls: ['./modal-menu.component.scss'],
+  selector: 'app-modal-dialog',
+  templateUrl: './modal-dialog.component.html',
+  styleUrls: ['./modal-dialog.component.scss'],
 })
-export class ModalMenuComponent {
+export class ModalDialogComponent {
   @Input() todo?: Todo;
 
   @Input() isEdit?: boolean;
