@@ -10,5 +10,3 @@ export class FilterByNamePipe implements PipeTransform {
     return todos.filter((todo) => todo.title.toLowerCase().includes(value.toLowerCase()));
   }
 }
-
-// TODO: po imeni

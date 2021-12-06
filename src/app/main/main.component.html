@@ -16,8 +16,6 @@
     <input [formControl]="search" type="text" name="search" placeholder="start to type title" />
   </div>
 
-  <!-- TODO: make filter by input word -->
-
   <div class="todo-wrapper">
     <app-todo-card
       *ngFor="let todo of todos | filterByName: search.value"
