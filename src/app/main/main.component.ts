@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { DATA } from '../shared/data/todo-data';
 import { Todo } from '../shared/interfaces/todos-interface';
 
@@ -18,6 +18,8 @@ export class MainComponent {
   todo!: Todo;
 
   todos: Todo[] = DATA;
+
+  search = new FormControl('');
 
   openModal() {
     this.isCreated = !this.isCreated;

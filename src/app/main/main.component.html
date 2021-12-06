@@ -3,22 +3,24 @@
   <button type="button" (click)="openModal()">create Todo</button>
 </div>
 
-<app-modal-menu
+<app-modal-dialog
   [isEdit]="isEdit"
   [todo]="todo"
   *ngIf="isCreated || isEdit"
   (addTodo)="addTodo($event)"
   (edit)="edit($event)"
-></app-modal-menu>
+></app-modal-dialog>
 
 <div *ngIf="todos.length; else elseBlock" class="list">
-  <div class="sort-wrapper"></div>
+  <div class="sort-wrapper">
+    <input [formControl]="search" type="text" name="search" placeholder="start to type title" />
+  </div>
 
   <!-- TODO: make filter by input word -->
 
   <div class="todo-wrapper">
     <app-todo-card
-      *ngFor="let todo of todos | filterByDone"
+      *ngFor="let todo of todos | filterByName: search.value"
       [todo]="todo"
       (deleteTodo)="deleteTodo($event)"
       (editTodo)="submitEditTodo($event)"

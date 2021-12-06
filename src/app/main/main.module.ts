@@ -2,11 +2,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ComponentsModule } from './components/components.module';
 import { MainComponent } from './main.component';
-import { FilterByDonePipe } from '../shared/pipes/sort-by-done.pipe';
+import { FilterByNamePipe } from '../shared/pipes/filter-by-name';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [MainComponent, FilterByDonePipe],
-  imports: [CommonModule, ComponentsModule],
+  declarations: [MainComponent, FilterByNamePipe],
+  imports: [CommonModule, ComponentsModule, ReactiveFormsModule],
   exports: [MainComponent],
 })
 export class MainModule {}
