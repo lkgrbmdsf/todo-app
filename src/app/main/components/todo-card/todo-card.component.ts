@@ -15,8 +15,6 @@ export class TodoCardComponent {
 
   @Output() doneTodo = new EventEmitter();
 
-  isDone: boolean = false;
-
   isShown: boolean = false;
 
   deleteCurrent() {

@@ -48,11 +48,6 @@ export class MainComponent {
   }
 
   deleteTodo(todo: Todo) {
-    for (let i = 0; i < this.todos.length; i++) {
-      if (this.todos[i] === todo) {
-        this.todos.splice(i, 1);
-      }
-    }
+    this.todos = this.todos.filter((td) => td !== todo);
   }
-  //TODO: not splice but filter
 }
