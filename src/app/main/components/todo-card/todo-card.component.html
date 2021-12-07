@@ -1,31 +1,13 @@
-<ng-content></ng-content>
+<li class="todos" [class.isDone]="todo?.isDone">
+  <h2 class="title" (click)="showDesc()">{{ todo?.title }}</h2>
+  <p *ngIf="isShown" class="description">
+    {{ todo?.description }}
+  </p>
+  <p>{{ todo?.deadlineDate | date: 'dd/MM/yyyy' }}</p>
 
-<div class="todos">
-  <ul>
-    <li *ngFor="let todo of todos | filterByDefault" (click)="showDesc(todo)">
-      <h2 class="title">{{ todo.title }}</h2>
-      <p class="description">
-        {{ todo.isShown ? todo.description : '' }}
-      </p>
-      <p>{{ todo.deadlineDate | date: 'longDate' }}</p>
-      <div class="buttons">
-        <button type="button" (click)="deleteTodo(todo)">delete</button>
-        <button type="button" (click)="doneTodo(todo)">done</button>
-        <button type="button" (click)="editTodo(todo)">edit</button>
-      </div>
-    </li>
-  </ul>
-</div>
-
-<div class="todos">
-  <h1>Done Todos</h1>
-  <ul class="done-todos">
-    <li *ngFor="let todo of todos | filterByDone">
-      <h2>{{ todo.title }}</h2>
-      <p>{{ todo.description }}</p>
-      <p>Deadline date: {{ todo.deadlineDate | date: 'MMM d' }}</p>
-      <p>Done at: {{ todaysDate | date: 'longDate' }}</p>
-      <button type="button done-button" (click)="deleteTodo(todo)">delete</button>
-    </li>
-  </ul>
-</div>
+  <div class="buttons">
+    <button type="button" (click)="deleteCurrent()">delete</button>
+    <button *ngIf="!todo?.isDone" type="button" (click)="makeDone()">done</button>
+    <button *ngIf="!todo?.isDone" type="button" (click)="edit()">edit</button>
+  </div>
+</li>

@@ -1,0 +1,49 @@
+.modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  margin-left: 100px;
+  padding: 10px 20px;
+  position: fixed;
+  top: 110px;
+  left: 0;
+  border: 1px solid whitesmoke;
+
+  background-color: white;
+
+  .error-msg {
+    width: 150px;
+  }
+
+  button {
+    text-align: center;
+    width: min-content;
+  }
+
+  label {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  input {
+    width: 150px;
+    margin-left: 15px;
+  }
+
+  input:focus {
+    outline: none;
+  }
+
+  .permitted {
+    border: 2px solid green;
+    border-radius: 4px;
+  }
+
+  .denied {
+    border: 2px solid red;
+    border-radius: 4px;
+  }
+}

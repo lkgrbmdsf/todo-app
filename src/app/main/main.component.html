@@ -1,16 +1,38 @@
-<app-modal-window
-  [isEdit]="isEdit"
-  [isCreated]="isCreated"
-  [currentTodo]="currentTodo"
-  (makeChange)="refresh($event)"
-></app-modal-window>
-<app-todo-card
-  [isEdit]="isEdit"
-  (makeChange)="refresh($event)"
-  (todoEmit)="currentTodoEmit($event)"
->
-  <div class="main">
-    <h1>Todo app</h1>
-    <button type="button" (click)="createTodo()">create Todo</button>
+<div class="main">
+  <h1>Todo app</h1>
+  <button type="button" (click)="openModal()">create Todo</button>
+</div>
+
+<app-modal-dialog
+  [todo]="todo"
+  *ngIf="isCreated || isEdit"
+  (addTodo)="addTodo($event)"
+  (edit)="edit($event)"
+></app-modal-dialog>
+
+<div *ngIf="todos.length; else elseBlock" class="list">
+  <div class="sort-wrapper">
+    <input
+      [formControl]="search"
+      type="text"
+      name="search"
+      placeholder="start to type a title"
+      autocomplete="off"
+    />
   </div>
-</app-todo-card>
+
+  <div class="todo-wrapper">
+    <app-todo-card
+      *ngFor="let todo of todos | filterByName: search.value"
+      [todo]="todo"
+      (deleteTodo)="deleteTodo($event)"
+      (editTodo)="submitEditTodo($event)"
+      (doneTodo)="doneTodo($event)"
+    >
+    </app-todo-card>
+  </div>
+</div>
+
+<ng-template #elseBlock>
+  <div class="list">no todos are currently in the list</div>
+</ng-template>

@@ -1,0 +1,52 @@
+<div class="modal" [formGroup]="todoForm">
+  <ng-container *ngIf="formTitle.invalid && isTriggered">
+    <div>
+      {{ titleError }}
+    </div>
+  </ng-container>
+
+  <label for="title">
+    Todo title:
+    <input
+      class="test"
+      type="text"
+      name="title"
+      formControlName="title"
+      autocomplete="off"
+      placeholder="{{ todo ? todo.title : '' }}"
+      [class.permitted]="formTitle.valid && isTriggered"
+      [class.denied]="formTitle.invalid && isTriggered"
+  /></label>
+
+  <ng-container *ngIf="formDescription.invalid && isTriggered">
+    <div>
+      {{ descError }}
+    </div>
+  </ng-container>
+
+  <label for="description"
+    >Todo description:
+    <input
+      type="text"
+      name="description"
+      formControlName="description"
+      autocomplete="off"
+      placeholder="{{ todo ? todo.description : '' }}"
+      [class.permitted]="formDescription.valid && isTriggered"
+      [class.denied]="formDescription.invalid && isTriggered"
+    />
+  </label>
+
+  <label for="deadlineDate"
+    >Todo deadline:
+    <input type="date" name="deadlineDate" formControlName="deadlineDate" [min]="todaysDate" />
+  </label>
+
+  <button
+    type="button"
+    [disabled]="isTriggered && todoForm.invalid"
+    (click)="todo ? editTodo() : addNewTodo()"
+  >
+    submit
+  </button>
+</div>

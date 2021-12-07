@@ -5,3 +5,24 @@
     margin-top: 10px;
   }
 }
+
+.list {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .sort-wrapper {
+    display: flex;
+    p {
+      margin-left: 10px;
+    }
+  }
+}
+
+.todo-wrapper {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, 0fr);
+}

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { Todo } from '../shared/interfaces/todos-interface';
+import { FormControl, FormGroup } from '@angular/forms';
+import { DATA } from '../../assets/data/todo-data';
+import { Todo } from '../../assets/interfaces/todos-interface';
 
 @Component({
   selector: 'app-main',
@@ -11,17 +13,41 @@ export class MainComponent {
 
   isEdit: boolean = false;
 
-  currentTodo?: Todo;
+  isSorted: boolean = false;
 
-  createTodo(): void {
+  todo!: Todo;
+
+  todos: Todo[] = DATA;
+
+  search = new FormControl('');
+
+  openModal() {
     this.isCreated = !this.isCreated;
   }
 
-  refresh(edit: boolean) {
-    this.isEdit = edit;
+  addTodo(todo: FormGroup) {
+    this.todos.push(todo.value);
+    this.isCreated = !this.isCreated;
   }
 
-  currentTodoEmit(todo: Todo) {
-    this.currentTodo = todo;
+  submitEditTodo(todo: Todo) {
+    this.todo = todo;
+    this.isEdit = true;
+  }
+
+  edit(todo: FormGroup) {
+    this.todo.title = todo.value.title;
+    this.todo.description = todo.value.description;
+    this.todo.deadlineDate = todo.value.deadlineDate;
+
+    this.isEdit = false;
+  }
+
+  doneTodo(todo: Todo) {
+    todo.isDone = true;
+  }
+
+  deleteTodo(todo: Todo) {
+    this.todos = this.todos.filter((td) => td !== todo);
   }
 }
