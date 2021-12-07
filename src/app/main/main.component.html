@@ -1,4 +1,14 @@
-<app-todo-card [isCreated]="isCreated">
+<app-modal-window
+  [isEdit]="isEdit"
+  [isCreated]="isCreated"
+  [currentTodo]="currentTodo"
+  (makeChange)="refresh($event)"
+></app-modal-window>
+<app-todo-card
+  [isEdit]="isEdit"
+  (makeChange)="refresh($event)"
+  (todoEmit)="currentTodoEmit($event)"
+>
   <div class="main">
     <h1>Todo app</h1>
     <button type="button" (click)="createTodo()">create Todo</button>

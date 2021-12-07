@@ -1,11 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TodoCardComponent } from './todo-card/todo-card.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FilterByDonePipe } from 'src/app/shared/pipes/filter-by-done.pipe';
+import { FilterByDefaultPipe } from 'src/app/shared/pipes/filter-by-default.pipe';
+import { ModalWindowComponent } from './modal-window/modal-window.component';
 
 @NgModule({
-  declarations: [TodoCardComponent],
-  imports: [CommonModule, FormsModule],
-  exports: [TodoCardComponent],
+  declarations: [TodoCardComponent, FilterByDonePipe, FilterByDefaultPipe, ModalWindowComponent],
+  imports: [ReactiveFormsModule, CommonModule, FormsModule],
+  exports: [TodoCardComponent, ModalWindowComponent],
 })
 export class ComponentsModule {}

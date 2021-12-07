@@ -4,6 +4,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 
   ul {
     list-style: none;
@@ -15,7 +16,7 @@
       justify-content: center;
       align-items: center;
       width: 15em;
-      height: 10em;
+      min-height: 10em;
       margin: 10px;
       border-radius: 5px;
       border: 2px solid ghostwhite;
@@ -37,16 +38,11 @@
   }
 }
 
-.description {
-  visibility: hidden;
-}
-
-.extended {
-  visibility: visible;
-}
-
 .done-todos {
   li {
     background-color: rgb(209, 241, 161);
+  }
+  button {
+    margin: 5px;
   }
 }

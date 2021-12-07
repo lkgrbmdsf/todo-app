@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Todo } from '../shared/interfaces/todos-interface';
 
 @Component({
   selector: 'app-main',
@@ -8,7 +9,19 @@ import { Component } from '@angular/core';
 export class MainComponent {
   isCreated: boolean = false;
 
+  isEdit: boolean = false;
+
+  currentTodo?: Todo;
+
   createTodo(): void {
-    this.isCreated = true;
+    this.isCreated = !this.isCreated;
+  }
+
+  refresh(edit: boolean) {
+    this.isEdit = edit;
+  }
+
+  currentTodoEmit(todo: Todo) {
+    this.currentTodo = todo;
   }
 }

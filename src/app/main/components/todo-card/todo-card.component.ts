@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { TODAYSDATE } from 'src/app/shared/const/const-values';
 import { DATA } from 'src/app/shared/data/todo-data';
 import { Todo } from 'src/app/shared/interfaces/todos-interface';
 
@@ -8,30 +9,21 @@ import { Todo } from 'src/app/shared/interfaces/todos-interface';
   styleUrls: ['./todo-card.component.scss'],
 })
 export class TodoCardComponent {
-  @Input() isCreated: boolean = false;
+  @Output() makeChange = new EventEmitter<boolean>();
 
-  isEdit: boolean = false;
+  @Output() todoEmit = new EventEmitter<Todo>();
 
-  isDone: boolean = false;
+  @Input() isEdit: boolean = false;
 
   currentTodo?: Todo;
 
-  todos = DATA;
+  todos: Todo[] = DATA;
 
-  doneTodos: Todo[] = [];
-
-  todoTitle: string = '';
-
-  todoDescription: string = '';
-
-  addTodo(title: string, description: string) {
-    const todo = { title: title, description: description };
-    this.isCreated = false;
-    return this.todos.push(todo);
-  }
+  todaysDate: string = TODAYSDATE;
 
   showDesc(todo: Todo): void {
     this.currentTodo = todo;
+    this.currentTodo.isShown = !this.currentTodo.isShown;
   }
 
   deleteTodo(todo: Todo): Todo[] {
@@ -43,36 +35,16 @@ export class TodoCardComponent {
     return this.todos;
   }
 
-  deleteDoneTodo(todo: Todo): Todo[] {
-    for (let i = 0; i < this.doneTodos.length; i++) {
-      if (this.doneTodos[i].title === todo.title) {
-        this.doneTodos.splice(i, 1);
-      }
-    }
-    return this.doneTodos;
-  }
-
   editTodo(todo: Todo): void {
-    this.isEdit = true;
+    this.isEdit = !this.isEdit;
     this.currentTodo = todo;
+    this.makeChange.emit(this.isEdit);
+    this.todoEmit.emit(this.currentTodo);
   }
 
-  submitTodo(title: string, description: string): void {
-    this.isEdit = false;
-
-    if (this.currentTodo) {
-      this.currentTodo.title = title;
-      this.currentTodo.description = description;
-    }
-  }
-
-  doneTodo(todo: Todo) {
-    this.isDone = true;
-    for (let i = 0; i < this.todos.length; i++) {
-      if (this.todos[i].title === todo.title) {
-        this.todos.splice(i, 1);
-      }
-    }
-    this.doneTodos.push(todo);
+  doneTodo(todo: Todo): Todo[] {
+    this.currentTodo = todo;
+    this.currentTodo.isDone = true;
+    return this.todos;
   }
 }
