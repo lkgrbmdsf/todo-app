@@ -68,8 +68,7 @@ export class ModalDialogComponent {
       : (this.descError = `${'unknown error: ' + this.formDescription.errors}`);
   }
 
-  // TODO: make var
-  // TODO: {error: custom string}
+  // {error: custom string} with custom errors would be better alot
 
   addNewTodo() {
     this.isTriggered = true;
