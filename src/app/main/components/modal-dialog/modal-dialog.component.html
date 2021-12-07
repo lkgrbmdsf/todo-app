@@ -1,7 +1,7 @@
 <div class="modal" [formGroup]="todoForm">
   <ng-container *ngIf="formTitle.invalid && isTriggered">
     <div>
-      {{ titleErrorHandler() }}
+      {{ titleError }}
     </div>
   </ng-container>
 
@@ -20,7 +20,7 @@
 
   <ng-container *ngIf="formDescription.invalid && isTriggered">
     <div>
-      {{ descErrorHandler() }}
+      {{ descError }}
     </div>
   </ng-container>
 

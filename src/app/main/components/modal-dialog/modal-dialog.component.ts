@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Todo } from 'src/assets/interfaces/todos-interface';
-import { TODAYSDATE } from '../../constants/const-values';
+import { TODAYSDATE } from '../constants/const-values';
 
 @Component({
   selector: 'app-modal-dialog',
@@ -18,6 +18,10 @@ export class ModalDialogComponent {
   todaysDate: string = TODAYSDATE;
 
   isTriggered: boolean = false;
+
+  titleError: string = '';
+
+  descError: string = '';
 
   constructor(private fb: FormBuilder) {}
 
@@ -50,18 +54,18 @@ export class ModalDialogComponent {
 
   titleErrorHandler(): string {
     return this.formTitle.errors?.required
-      ? 'should not be empty'
+      ? (this.titleError = 'should not be empty')
       : this.formTitle.errors?.forbidden
-      ? 'should be 4 or less words'
-      : `${'unknown error: ' + this.formTitle.errors}`;
+      ? (this.titleError = 'should be 4 or less words')
+      : (this.titleError = `${'unknown error: ' + this.formTitle.errors}`);
   }
 
   descErrorHandler(): string {
     return this.formDescription.errors?.required
-      ? 'should not be empty'
+      ? (this.descError = 'should not be empty')
       : this.formDescription.errors?.maxlength
-      ? 'should me less then 256 chars'
-      : `${'unknown error: ' + this.formDescription.errors}`;
+      ? (this.descError = 'should me less then 256 chars')
+      : (this.descError = `${'unknown error: ' + this.formDescription.errors}`);
   }
 
   // TODO: make var
@@ -69,6 +73,10 @@ export class ModalDialogComponent {
 
   addNewTodo() {
     this.isTriggered = true;
+
+    this.titleErrorHandler();
+    this.descErrorHandler();
+
     if (this.isTriggered) {
       if (this.todoForm.valid) {
         this.addTodo.emit(this.todoForm);
@@ -78,6 +86,10 @@ export class ModalDialogComponent {
 
   editTodo() {
     this.isTriggered = true;
+
+    this.titleErrorHandler();
+    this.descErrorHandler();
+
     if (this.isTriggered) {
       if (this.todoForm.valid) {
         this.edit.emit(this.todoForm);
