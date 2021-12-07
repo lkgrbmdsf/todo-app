@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Todo } from 'src/app/shared/interfaces/todos-interface';
+import { Todo } from 'src/assets/interfaces/todos-interface';
 
 @Component({
   selector: 'app-todo-card',

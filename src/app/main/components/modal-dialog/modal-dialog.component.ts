@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
-import { TODAYSDATE } from 'src/app/shared/const/const-values';
-import { Todo } from 'src/app/shared/interfaces/todos-interface';
+import { Todo } from 'src/assets/interfaces/todos-interface';
+import { TODAYSDATE } from '../../constants/const-values';
 
 @Component({
   selector: 'app-modal-dialog',

@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Todo } from '../interfaces/todos-interface';
+import { Todo } from '../../../../assets/interfaces/todos-interface';
 
 @Pipe({
   name: 'filterByName',

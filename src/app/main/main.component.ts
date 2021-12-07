@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { DATA } from '../shared/data/todo-data';
-import { Todo } from '../shared/interfaces/todos-interface';
+import { DATA } from '../../assets/data/todo-data';
+import { Todo } from '../../assets/interfaces/todos-interface';
 
 @Component({
   selector: 'app-main',
