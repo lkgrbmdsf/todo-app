@@ -2,9 +2,10 @@ import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { DATA } from 'src/assets/data/todo-data';
 import { Todo } from 'src/assets/interfaces/todos-interface';
+import { SharedModule } from '../shared.module';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: SharedModule,
 })
 export class TaskLogicService {
   isCreated: boolean = false;
