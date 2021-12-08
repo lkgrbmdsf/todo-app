@@ -11,7 +11,7 @@ export class TodoCardComponent {
 
   @Output() deleteTodo = new EventEmitter();
 
-  @Output() editTodo = new EventEmitter();
+  @Output() openModal = new EventEmitter();
 
   @Output() doneTodo = new EventEmitter();
 
@@ -21,15 +21,15 @@ export class TodoCardComponent {
     this.deleteTodo.emit(this.todo);
   }
 
-  edit() {
-    this.editTodo.emit(this.todo);
-  }
-
-  showDesc(): void {
-    this.isShown = !this.isShown;
+  openModalToEdit() {
+    this.openModal.emit(this.todo);
   }
 
   makeDone(): void {
     this.doneTodo.emit(this.todo);
+  }
+
+  showDesc(): void {
+    this.isShown = !this.isShown;
   }
 }

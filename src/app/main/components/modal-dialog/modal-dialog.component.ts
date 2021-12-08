@@ -31,6 +31,8 @@ export class ModalDialogComponent {
     deadlineDate: [TODAYSDATE, Validators.required],
   });
 
+  // TODO: validators to form; return null ||  Object error
+
   get formTitle(): FormGroup {
     return this.todoForm.get('title') as FormGroup;
   }
@@ -68,7 +70,7 @@ export class ModalDialogComponent {
       : (this.descError = `${'unknown error: ' + this.formDescription.errors}`);
   }
 
-  // {error: custom string} with custom errors would be better alot
+  //TODO: to html as str
 
   addNewTodo() {
     this.isTriggered = true;
@@ -78,7 +80,7 @@ export class ModalDialogComponent {
 
     if (this.isTriggered) {
       if (this.todoForm.valid) {
-        this.addTodo.emit(this.todoForm);
+        this.addTodo.emit(this.todoForm.value as Todo);
       }
     }
   }
@@ -91,7 +93,7 @@ export class ModalDialogComponent {
 
     if (this.isTriggered) {
       if (this.todoForm.valid) {
-        this.edit.emit(this.todoForm);
+        this.edit.emit(this.todoForm.value as Todo);
       }
     }
   }

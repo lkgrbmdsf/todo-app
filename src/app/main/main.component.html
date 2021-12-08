@@ -4,13 +4,13 @@
 </div>
 
 <app-modal-dialog
-  [todo]="service.todo"
-  *ngIf="service.isCreated || service.isEdit"
-  (addTodo)="service.addTodo($event)"
-  (edit)="service.edit($event)"
+  [todo]="todo"
+  *ngIf="isCreated"
+  (addTodo)="addTodo($event)"
+  (edit)="editTodo($event)"
 ></app-modal-dialog>
 
-<div *ngIf="service.todos.length; else elseBlock" class="list">
+<div *ngIf="todos.length; else elseBlock" class="list">
   <div class="sort-wrapper">
     <input
       [formControl]="search"
@@ -23,11 +23,11 @@
 
   <div class="todo-wrapper">
     <app-todo-card
-      *ngFor="let todo of service.todos | filterByName: search.value"
+      *ngFor="let todo of todos | filterByName: search.value"
       [todo]="todo"
-      (deleteTodo)="service.deleteTodo($event)"
-      (editTodo)="service.submitEditTodo($event)"
-      (doneTodo)="service.doneTodo($event)"
+      (deleteTodo)="deleteTodo($event)"
+      (openModal)="openModalToEdit($event)"
+      (doneTodo)="doneTodo($event)"
     >
     </app-todo-card>
   </div>
