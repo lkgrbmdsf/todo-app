@@ -16,7 +16,7 @@ export class MainComponent {
 
   search = new FormControl('');
 
-  todos = this.service.todos;
+  todos: Todo[] = this.service.todos;
 
   todo?: Todo;
 
@@ -38,15 +38,20 @@ export class MainComponent {
 
   deleteTodo(todo: Todo) {
     this.service.deleteTodo(todo);
+    this.todos = this.service.todos;
+    //TODO:  спросить
   }
 
   editTodo(todo: Todo) {
     this.todo!.title = todo.title;
     this.todo!.description = todo.description;
     this.todo!.deadlineDate = todo.deadlineDate;
-    //TODO: how to fix it
+    //TODO: спросить
+
     this.service.edit(todo);
     this.isCreated = false;
+    this.todo = undefined;
+    //TODO: спросить
   }
 
   openModalToEdit(todo: Todo) {

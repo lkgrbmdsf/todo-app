@@ -31,7 +31,7 @@ export class ModalDialogComponent {
     deadlineDate: [TODAYSDATE, Validators.required],
   });
 
-  // TODO: validators to form; return null ||  Object error
+  //TODO: спросить
 
   get formTitle(): FormGroup {
     return this.todoForm.get('title') as FormGroup;
@@ -54,29 +54,8 @@ export class ModalDialogComponent {
     };
   }
 
-  titleErrorHandler(): string {
-    return this.formTitle.errors?.required
-      ? (this.titleError = 'should not be empty')
-      : this.formTitle.errors?.forbidden
-      ? (this.titleError = 'should be 4 or less words')
-      : (this.titleError = `${'unknown error: ' + this.formTitle.errors}`);
-  }
-
-  descErrorHandler(): string {
-    return this.formDescription.errors?.required
-      ? (this.descError = 'should not be empty')
-      : this.formDescription.errors?.maxlength
-      ? (this.descError = 'should me less then 256 chars')
-      : (this.descError = `${'unknown error: ' + this.formDescription.errors}`);
-  }
-
-  //TODO: to html as str
-
   addNewTodo() {
     this.isTriggered = true;
-
-    this.titleErrorHandler();
-    this.descErrorHandler();
 
     if (this.isTriggered) {
       if (this.todoForm.valid) {
@@ -87,9 +66,6 @@ export class ModalDialogComponent {
 
   editTodo() {
     this.isTriggered = true;
-
-    this.titleErrorHandler();
-    this.descErrorHandler();
 
     if (this.isTriggered) {
       if (this.todoForm.valid) {

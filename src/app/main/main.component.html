@@ -10,7 +10,7 @@
   (edit)="editTodo($event)"
 ></app-modal-dialog>
 
-<div *ngIf="todos.length; else elseBlock" class="list">
+<div *ngIf="todos?.length; else elseBlock" class="list">
   <div class="sort-wrapper">
     <input
       [formControl]="search"
@@ -23,7 +23,7 @@
 
   <div class="todo-wrapper">
     <app-todo-card
-      *ngFor="let todo of todos | filterByName: search.value"
+      *ngFor="let todo of todos! | filterByName: search.value"
       [todo]="todo"
       (deleteTodo)="deleteTodo($event)"
       (openModal)="openModalToEdit($event)"
