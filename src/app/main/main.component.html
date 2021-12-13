@@ -4,8 +4,8 @@
 </div>
 
 <app-modal-dialog
-  [todo]="todo"
-  *ngIf="isCreated"
+  [todo]="todoToEdit"
+  *ngIf="todoToEdit || isCreated"
   (addTodo)="addTodo($event)"
   (edit)="editTodo($event)"
 ></app-modal-dialog>
@@ -23,7 +23,7 @@
 
   <div class="todo-wrapper">
     <app-todo-card
-      *ngFor="let todo of todos! | filterByName: search.value"
+      *ngFor="let todo of todos | filterByName: search.value"
       [todo]="todo"
       (deleteTodo)="deleteTodo($event)"
       (openModal)="openModalToEdit($event)"

@@ -74,7 +74,12 @@ export class ModalDialogComponent {
 
     if (this.isTriggered) {
       if (this.todoForm.valid) {
-        this.edit.emit(this.todoForm.value as Todo);
+        const todo = {
+          id: this.todo?.id,
+          ...this.todoForm.value,
+          isDone: this.todo?.isDone,
+        };
+        this.edit.emit(todo);
       }
     }
   }

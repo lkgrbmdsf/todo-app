@@ -6,17 +6,29 @@ import { Todo } from 'src/assets/interfaces/todos-interface';
 export class TaskLogicService {
   todos: Todo[] = DATA;
 
-  todo!: Todo;
-
   addTodo(todo: Todo) {
+    if (!todo.id) {
+      todo.id = Date.now();
+    }
+    if (!todo.isDone) {
+      todo.isDone = false;
+    }
     this.todos.push(todo);
   }
 
   edit(todo: Todo) {
-    this.todo = todo;
+    let editedTodo = this.todos.find((td) => td.id === todo.id);
+    // console.log(editedTodo, todo);
+    // editedTodo = todo;
+    // return editedTodo;
+    Object.assign(editedTodo, todo);
   }
 
-  deleteTodo(todo: Todo) {
-    this.todos = this.todos.filter((td) => td !== todo);
+  deleteTodo(id: number) {
+    this.todos = this.todos.filter((todo) => todo.id !== id);
+  }
+
+  getAllTodos(): Todo[] {
+    return this.todos;
   }
 }

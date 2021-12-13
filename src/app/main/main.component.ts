@@ -10,52 +10,42 @@ import { TaskLogicService } from './shared/services/tasks-logic.service';
   providers: [TaskLogicService],
 })
 export class MainComponent {
-  isCreated: boolean = false;
-
-  isEdit: boolean = false;
-
   search = new FormControl('');
 
-  todos: Todo[] = this.service.todos;
+  todoToEdit?: Todo;
 
-  todo?: Todo;
+  isCreated: boolean = false;
 
   constructor(public service: TaskLogicService) {}
 
-  openModal() {
+  openModal(): void {
     this.isCreated = !this.isCreated;
   }
 
-  doneTodo(todo: Todo) {
+  doneTodo(todo: Todo): void {
     todo.isDone = true;
     this.service.edit(todo);
   }
 
-  addTodo(todo: Todo) {
+  addTodo(todo: Todo): void {
     this.service.addTodo(todo);
     this.isCreated = false;
   }
 
-  deleteTodo(todo: Todo) {
-    this.service.deleteTodo(todo);
-    this.todos = this.service.todos;
-    //TODO:  спросить
+  deleteTodo(todo: Todo): void {
+    this.service.deleteTodo(todo.id);
   }
 
-  editTodo(todo: Todo) {
-    this.todo!.title = todo.title;
-    this.todo!.description = todo.description;
-    this.todo!.deadlineDate = todo.deadlineDate;
-    //TODO: спросить
-
+  editTodo(todo: Todo): void {
     this.service.edit(todo);
-    this.isCreated = false;
-    this.todo = undefined;
-    //TODO: спросить
+    this.todoToEdit = undefined;
   }
 
-  openModalToEdit(todo: Todo) {
-    this.isCreated = true;
-    this.todo = todo;
+  openModalToEdit(todo: Todo): void {
+    this.todoToEdit = todo;
+  }
+
+  get todos(): Todo[] {
+    return this.service.getAllTodos();
   }
 }
