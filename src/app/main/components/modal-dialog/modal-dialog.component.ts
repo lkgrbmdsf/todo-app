@@ -27,11 +27,9 @@ export class ModalDialogComponent {
 
   todoForm: FormGroup = this.fb.group({
     title: ['', [Validators.required, this.forbiddenNameValidator()]],
-    description: ['', [Validators.required, Validators.maxLength(256)]],
+    description: ['', [Validators.required, this.maxLentgthValidator()]],
     deadlineDate: [TODAYSDATE, Validators.required],
   });
-
-  //TODO: спросить
 
   get formTitle(): FormGroup {
     return this.todoForm.get('title') as FormGroup;
@@ -50,7 +48,14 @@ export class ModalDialogComponent {
       const accepted = control.value.split(' ').filter((str: string) => str.length > 0);
       return accepted.length > 0 && accepted.length <= 4
         ? null
-        : { forbidden: { value: control.value } };
+        : { forbidden: 'should be 4 words max' };
+    };
+  }
+
+  maxLentgthValidator(): null | Object {
+    return (control: FormGroup): ValidationErrors | null => {
+      const accepted = control.value.length;
+      return accepted < 256 ? null : { length: 'should be 256 chars max' };
     };
   }
 

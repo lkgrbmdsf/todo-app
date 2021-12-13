@@ -1,13 +1,7 @@
 <div class="modal" [formGroup]="todoForm">
   <ng-container *ngIf="formTitle.invalid && isTriggered">
     <div>
-      {{
-        formTitle.hasError('required')
-          ? 'title required'
-          : formTitle.hasError('forbidden')
-          ? 'should be less then 4 max'
-          : formTitle.errors
-      }}
+      {{ formTitle.hasError('required') ? 'title required' : formTitle.getError('forbidden') }}
     </div>
   </ng-container>
 
@@ -29,9 +23,7 @@
       {{
         formDescription.hasError('required')
           ? 'description required'
-          : formDescription.hasError('maxlength')
-          ? 'should be 256 chars or less'
-          : formDescription.errors
+          : formDescription.getError('length')
       }}
     </div>
   </ng-container>
