@@ -18,9 +18,6 @@ export class TaskLogicService {
 
   edit(todo: Todo) {
     let editedTodo = this.todos.find((td) => td.id === todo.id);
-    // console.log(editedTodo, todo);
-    // editedTodo = todo;
-    // return editedTodo;
     Object.assign(editedTodo, todo);
   }
 

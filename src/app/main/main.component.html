@@ -10,7 +10,7 @@
   (edit)="editTodo($event)"
 ></app-modal-dialog>
 
-<div *ngIf="todos?.length; else elseBlock" class="list">
+<div *ngIf="todos.length; else elseBlock" class="list">
   <div class="sort-wrapper">
     <input
       [formControl]="search"
