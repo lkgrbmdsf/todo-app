@@ -18,7 +18,6 @@ export class TaskLogicService {
 
   edit(todo: Todo) {
     let editedTodoIndex = this.todos.findIndex((td) => td.id === todo.id);
-    console.log(editedTodoIndex);
     this.todos[editedTodoIndex] = { ...todo };
   }
 

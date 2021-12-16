@@ -19,7 +19,10 @@ export class MainComponent {
   constructor(public service: TaskLogicService) {}
 
   openModal(): void {
-    this.isCreated = !this.isCreated;
+    if (this.todoToEdit) {
+      this.isCreated = false;
+    }
+    this.isCreated = true;
   }
 
   doneTodo(todo: Todo): void {
