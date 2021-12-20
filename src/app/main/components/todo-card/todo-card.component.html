@@ -1,13 +1,13 @@
 <li class="todos" [class.isDone]="todo?.isDone">
-  <h2 class="title" (click)="showDesc()">{{ todo?.title }}</h2>
+  <h2 class="title" (click)="showDesc()">{{ todo.title }}</h2>
   <p *ngIf="isShown" class="description">
-    {{ todo?.description }}
+    {{ todo.description }}
   </p>
-  <p>{{ todo?.deadlineDate | date: 'dd/MM/yyyy' }}</p>
+  <p>{{ todo.deadlineDate | date: 'dd/MM/yyyy' }}</p>
 
   <div class="buttons">
     <button type="button" (click)="deleteCurrent()">delete</button>
-    <button *ngIf="!todo?.isDone" type="button" (click)="makeDone()">done</button>
-    <button *ngIf="!todo?.isDone" type="button" (click)="openModalToEdit()">edit</button>
+    <button type="button" (click)="makeDone()">{{ todo.isDone ? 'make undone' : 'done' }}</button>
+    <button *ngIf="!todo.isDone" type="button" (click)="openModalToEdit()">edit</button>
   </div>
 </li>

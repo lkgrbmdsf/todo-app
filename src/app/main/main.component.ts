@@ -14,25 +14,26 @@ export class MainComponent {
 
   todoToEdit?: Todo;
 
-  isCreated: boolean = false;
-
   constructor(public service: TaskLogicService) {}
 
-  openModal(): void {
-    if (this.todoToEdit) {
-      this.isCreated = false;
+  openModal(todo?: Todo): void {
+    if (todo?.id) {
+      this.todoToEdit = todo;
+    } else {
+      todo = {} as Todo;
+      this.todoToEdit = todo;
     }
-    this.isCreated = true;
   }
 
   doneTodo(todo: Todo): void {
-    todo.isDone = true;
+    todo.isDone = !todo.isDone;
     this.service.edit(todo);
   }
 
   addTodo(todo: Todo): void {
+    console.log(todo);
     this.service.addTodo(todo);
-    this.isCreated = false;
+    this.todoToEdit = undefined;
   }
 
   deleteTodo(todo: Todo): void {
@@ -42,10 +43,6 @@ export class MainComponent {
   editTodo(todo: Todo): void {
     this.service.edit(todo);
     this.todoToEdit = undefined;
-  }
-
-  openModalToEdit(todo: Todo): void {
-    this.todoToEdit = todo;
   }
 
   get todos(): Todo[] {

@@ -19,10 +19,6 @@ export class ModalDialogComponent {
 
   isTriggered: boolean = false;
 
-  titleError: string = '';
-
-  descError: string = '';
-
   constructor(private fb: FormBuilder) {}
 
   todoForm: FormGroup = this.fb.group({
@@ -62,25 +58,21 @@ export class ModalDialogComponent {
   addNewTodo() {
     this.isTriggered = true;
 
-    if (this.isTriggered) {
-      if (this.todoForm.valid) {
-        this.addTodo.emit(this.todoForm.value as Todo);
-      }
+    if (this.todoForm.valid) {
+      this.addTodo.emit(this.todoForm.value as Todo);
     }
   }
 
   editTodo() {
     this.isTriggered = true;
 
-    if (this.isTriggered) {
-      if (this.todoForm.valid) {
-        const todo = {
-          id: this.todo?.id,
-          ...this.todoForm.value,
-          isDone: this.todo?.isDone,
-        };
-        this.edit.emit(todo);
-      }
+    if (this.todoForm.valid) {
+      const todo = {
+        id: this.todo?.id,
+        ...this.todoForm.value,
+        isDone: this.todo?.isDone,
+      };
+      this.edit.emit(todo);
     }
   }
 }

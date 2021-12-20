@@ -7,12 +7,8 @@ export class TaskLogicService {
   todos: Todo[] = DATA;
 
   addTodo(todo: Todo) {
-    if (!todo.id) {
-      todo.id = Date.now();
-    }
-    if (!todo.isDone) {
-      todo.isDone = false;
-    }
+    todo.id = Date.now();
+    todo.isDone = false;
     this.todos.push(todo);
   }
 

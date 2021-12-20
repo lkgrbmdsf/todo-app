@@ -7,7 +7,7 @@ import { Todo } from 'src/assets/interfaces/todos-interface';
   styleUrls: ['./todo-card.component.scss'],
 })
 export class TodoCardComponent {
-  @Input() todo?: Todo;
+  @Input() todo!: Todo;
 
   @Output() deleteTodo = new EventEmitter();
 

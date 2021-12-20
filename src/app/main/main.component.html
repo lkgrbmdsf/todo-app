@@ -5,7 +5,7 @@
 
 <app-modal-dialog
   [todo]="todoToEdit"
-  *ngIf="todoToEdit || isCreated"
+  *ngIf="todoToEdit"
   (addTodo)="addTodo($event)"
   (edit)="editTodo($event)"
 ></app-modal-dialog>
@@ -26,7 +26,7 @@
       *ngFor="let todo of todos | filterByName: search.value"
       [todo]="todo"
       (deleteTodo)="deleteTodo($event)"
-      (openModal)="openModalToEdit($event)"
+      (openModal)="openModal($event)"
       (doneTodo)="doneTodo($event)"
     >
     </app-todo-card>
