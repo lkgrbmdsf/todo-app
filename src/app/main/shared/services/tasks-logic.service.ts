@@ -13,8 +13,9 @@ export class TaskLogicService {
   }
 
   edit(todo: Todo) {
-    let editedTodoIndex = this.todos.findIndex((td) => td.id === todo.id);
-    this.todos[editedTodoIndex] = { ...todo };
+    this.todos.find((td, i) => {
+      if (td.id === todo.id) this.todos[i] = { ...todo };
+    });
   }
 
   deleteTodo(id: number) {
