@@ -1,7 +1,7 @@
 <div class="modal" [formGroup]="todoForm">
   <ng-container *ngIf="formTitle.invalid && isTriggered">
     <div>
-      {{ titleError }}
+      {{ formTitle.hasError('required') ? 'title required' : formTitle.getError('forbidden') }}
     </div>
   </ng-container>
 
@@ -20,7 +20,11 @@
 
   <ng-container *ngIf="formDescription.invalid && isTriggered">
     <div>
-      {{ descError }}
+      {{
+        formDescription.hasError('required')
+          ? 'description required'
+          : formDescription.getError('length')
+      }}
     </div>
   </ng-container>
 
@@ -45,7 +49,7 @@
   <button
     type="button"
     [disabled]="isTriggered && todoForm.invalid"
-    (click)="todo ? editTodo() : addNewTodo()"
+    (click)="todo?.id ? editTodo() : addNewTodo()"
   >
     submit
   </button>

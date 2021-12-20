@@ -19,15 +19,11 @@ export class ModalDialogComponent {
 
   isTriggered: boolean = false;
 
-  titleError: string = '';
-
-  descError: string = '';
-
   constructor(private fb: FormBuilder) {}
 
   todoForm: FormGroup = this.fb.group({
     title: ['', [Validators.required, this.forbiddenNameValidator()]],
-    description: ['', [Validators.required, Validators.maxLength(256)]],
+    description: ['', [Validators.required, this.maxLentgthValidator()]],
     deadlineDate: [TODAYSDATE, Validators.required],
   });
 
@@ -48,51 +44,35 @@ export class ModalDialogComponent {
       const accepted = control.value.split(' ').filter((str: string) => str.length > 0);
       return accepted.length > 0 && accepted.length <= 4
         ? null
-        : { forbidden: { value: control.value } };
+        : { forbidden: 'should be 4 words max' };
     };
   }
 
-  titleErrorHandler(): string {
-    return this.formTitle.errors?.required
-      ? (this.titleError = 'should not be empty')
-      : this.formTitle.errors?.forbidden
-      ? (this.titleError = 'should be 4 or less words')
-      : (this.titleError = `${'unknown error: ' + this.formTitle.errors}`);
+  maxLentgthValidator(): null | Object {
+    return (control: FormGroup): ValidationErrors | null => {
+      const accepted = control.value.length;
+      return accepted < 256 ? null : { length: 'should be 256 chars max' };
+    };
   }
-
-  descErrorHandler(): string {
-    return this.formDescription.errors?.required
-      ? (this.descError = 'should not be empty')
-      : this.formDescription.errors?.maxlength
-      ? (this.descError = 'should me less then 256 chars')
-      : (this.descError = `${'unknown error: ' + this.formDescription.errors}`);
-  }
-
-  // {error: custom string} with custom errors would be better alot
 
   addNewTodo() {
     this.isTriggered = true;
 
-    this.titleErrorHandler();
-    this.descErrorHandler();
-
-    if (this.isTriggered) {
-      if (this.todoForm.valid) {
-        this.addTodo.emit(this.todoForm);
-      }
+    if (this.todoForm.valid) {
+      this.addTodo.emit(this.todoForm.value as Todo);
     }
   }
 
   editTodo() {
     this.isTriggered = true;
 
-    this.titleErrorHandler();
-    this.descErrorHandler();
-
-    if (this.isTriggered) {
-      if (this.todoForm.valid) {
-        this.edit.emit(this.todoForm);
-      }
+    if (this.todoForm.valid) {
+      const todo = {
+        id: this.todo?.id,
+        ...this.todoForm.value,
+        isDone: this.todo?.isDone,
+      };
+      this.edit.emit(todo);
     }
   }
 }

@@ -12,4 +12,3 @@ export class FilterByNamePipe implements PipeTransform {
     );
   }
 }
-//TODO: shared module pipe into the module

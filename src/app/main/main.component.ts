@@ -1,53 +1,51 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { DATA } from '../../assets/data/todo-data';
-import { Todo } from '../../assets/interfaces/todos-interface';
+import { FormControl } from '@angular/forms';
+import { Todo } from 'src/assets/interfaces/todos-interface';
+import { TaskLogicService } from './shared/services/tasks-logic.service';
 
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss'],
+  providers: [TaskLogicService],
 })
 export class MainComponent {
-  isCreated: boolean = false;
-
-  isEdit: boolean = false;
-
-  isSorted: boolean = false;
-
-  todo!: Todo;
-
-  todos: Todo[] = DATA;
-
   search = new FormControl('');
 
-  openModal() {
-    this.isCreated = !this.isCreated;
+  todoToEdit?: Todo;
+
+  constructor(public service: TaskLogicService) {}
+
+  openModal(todo?: Todo): void {
+    if (todo?.id) {
+      this.todoToEdit = todo;
+    } else {
+      todo = {} as Todo;
+      this.todoToEdit = todo;
+    }
   }
 
-  addTodo(todo: FormGroup) {
-    this.todos.push(todo.value);
-    this.isCreated = !this.isCreated;
+  doneTodo(todo: Todo): void {
+    todo.isDone = !todo.isDone;
+    this.service.edit(todo);
   }
 
-  submitEditTodo(todo: Todo) {
-    this.todo = todo;
-    this.isEdit = true;
+  addTodo(todo: Todo): void {
+    console.log(todo);
+    this.service.addTodo(todo);
+    this.todoToEdit = undefined;
   }
 
-  edit(todo: FormGroup) {
-    this.todo.title = todo.value.title;
-    this.todo.description = todo.value.description;
-    this.todo.deadlineDate = todo.value.deadlineDate;
-
-    this.isEdit = false;
+  deleteTodo(todo: Todo): void {
+    this.service.deleteTodo(todo.id);
   }
 
-  doneTodo(todo: Todo) {
-    todo.isDone = true;
+  editTodo(todo: Todo): void {
+    this.service.edit(todo);
+    this.todoToEdit = undefined;
   }
 
-  deleteTodo(todo: Todo) {
-    this.todos = this.todos.filter((td) => td !== todo);
+  get todos(): Todo[] {
+    return this.service.getAllTodos();
   }
 }
